@@ -38,7 +38,7 @@ jobs:
         uses: denoland/deployctl@v1
         with:
           project: "sztm-quiz-web"
-          entrypoint: "https://jsr.io/@std/http/1.0.7/file_server.ts"
+          entrypoint: "https://gist.githubusercontent.com/kamekyame/69f6b42f20b399a845f0d946784e961d/raw/a7f70b553da7205cd8362bbe78a72bf670801d57/angular_fileserver.ts"
           root: "dist/quiz-web/browser"
           
           
