@@ -2,7 +2,7 @@ const fs = require("node:fs")
 require('dotenv').config()
 
 const env = {
-  API_BASE: process.env["API_BASE"]
+  API_BASE: process.env["API_BASE"] ?? ""
 }
 
 fs.mkdirSync("src/environments", { recursive: true })
