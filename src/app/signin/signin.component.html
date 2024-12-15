@@ -1,4 +1,4 @@
-<form>
+<form [formGroup]="formData" (ngSubmit)="submit()">
     <label>
         ユーザー名
         <input />
@@ -11,3 +11,7 @@
 
     <button>ログイン</button>
 </form>
+
+@if (result) {
+<div>{{ result }}</div>
+}

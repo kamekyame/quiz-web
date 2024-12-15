@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import ENV from "../../environments/environment.json";
-import { ApiError, SignUpReq, SignUpRes } from "./api.interface";
+import { ApiError, SignInReq, SignInRes, SignUpReq, SignUpRes } from "./api.interface";
 
 @Injectable({
   providedIn: "root",
@@ -17,6 +17,13 @@ export class ApiService {
     return this.httpClient.post<SignUpRes>(this.baseUrl + "/signup", data, {
       withCredentials: true,
     });
+  }
+
+  /** ログイン */
+  signIn(data: SignInReq): Observable<SignInRes | ApiError> {
+    return this.httpClient.post<SignInReq>(this.baseUrl + "/signin", data, {
+      withCredentials: true,
+    }) 
   }
 }
 
