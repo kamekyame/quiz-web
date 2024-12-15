@@ -33,6 +33,8 @@ jobs:
 
       - name: Build step
         run: "yarn build"
+        env:
+          API_BASE: ${{ secrets.API_BASE }}
 
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
@@ -40,5 +42,3 @@ jobs:
           project: "sztm-quiz-web"
           entrypoint: "https://gist.githubusercontent.com/kamekyame/69f6b42f20b399a845f0d946784e961d/raw/a7f70b553da7205cd8362bbe78a72bf670801d57/angular_fileserver.ts"
           root: "dist/quiz-web/browser"
-          
-          
