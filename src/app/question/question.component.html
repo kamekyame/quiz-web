@@ -1,0 +1,11 @@
+@if (question) {
+<h2>問題</h2>
+<img [src]="question.imageUrl" />
+<h2>選択肢</h2>
+@for(choice of question.choices;track choice.choiceId) {
+<button (click)="sendAnswer(choice.choiceId)">
+  {{ choice.choiceId }}：{{ choice.text }}
+</button>
+} @if (result) {
+<div>{{ result }}</div>
+} }
