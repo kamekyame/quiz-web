@@ -1,0 +1,17 @@
+<form [formGroup]="formData" (ngSubmit)="submit()">
+    <label>
+        ユーザー名
+        <input [formControlName]="'username'" />
+    </label>
+
+    <label>
+        パスワード
+        <input [formControlName]="'password'" type="password" />
+    </label>
+
+    <button>ログイン</button>
+</form>
+
+@if (result) {
+<div>{{ result }}</div>
+}
