@@ -1,29 +1,36 @@
-import { Routes } from "@angular/router";
-import { SignupComponent } from "./signup/signup.component";
-import { SigninComponent } from "./signin/signin.component";
-import { FinishComponent } from "./finish/finish.component";
-import { WaitingComponent } from "./waiting/waiting.component";
-import { ControlComponent } from "./control/control.component";
+import { Routes } from '@angular/router';
+import { SignupComponent } from './signup/signup.component';
+import { SigninComponent } from './signin/signin.component';
+import { FinishComponent } from './finish/finish.component';
+import { WaitingComponent } from './waiting/waiting.component';
+import { ControlComponent } from './control/control.component';
+import { RegisterComponent } from './control/register/register.component';
 
 export const routes: Routes = [
   {
-    path: "signup",
+    path: 'signup',
     component: SignupComponent,
   },
   {
-    path: "signin",
+    path: 'signin',
     component: SigninComponent,
   },
   {
-    path: "finish",
+    path: 'finish',
     component: FinishComponent,
   },
   {
-    path: "waiting",
+    path: 'waiting',
     component: WaitingComponent,
   },
   {
-    path: "control",
+    path: 'control',
     component: ControlComponent,
+    children: [
+      {
+        path: 'register',
+        component: RegisterComponent,
+      },
+    ],
   },
 ];
