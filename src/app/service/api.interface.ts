@@ -5,7 +5,7 @@ export type SignUpReq = {
 };
 
 export type SignUpRes = {
-  username: string;
+  accessToken: string;
 };
 
 export type SignInReq = {
@@ -14,7 +14,7 @@ export type SignInReq = {
 };
 
 export type SignInRes = {
-  username: string;
+  accessToken: string;
 };
 
 export type GetQuestionRes = {
