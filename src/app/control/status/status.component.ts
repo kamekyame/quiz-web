@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-status',
   imports: [],
   templateUrl: './status.component.html',
-  styleUrl: './status.component.scss'
+  styleUrl: './status.component.scss',
 })
-export class StatusComponent {
-
-}
+export class StatusComponent {}
