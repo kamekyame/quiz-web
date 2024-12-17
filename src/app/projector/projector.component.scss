@@ -1,0 +1,32 @@
+.projector-title {
+  font-size: 64px;
+}
+
+.projector-body {
+  display: flex;
+  width: 100%;
+  gap: 40px;
+  flex-direction: row;
+  align-items: center;
+}
+
+.image-section {
+  display: flex;
+  width: 400px;
+  height: 300px;
+  justify-content: center;
+  align-items: center;
+  background-color: grey;
+}
+
+.choice-section {
+  width: 100%;
+  height: auto;
+}
+
+.choice {
+  border: solid, 2px;
+  border-radius: 10px;
+  padding: 16px;
+  margin: 32px;
+}
