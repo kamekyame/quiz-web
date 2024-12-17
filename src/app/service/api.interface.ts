@@ -17,6 +17,22 @@ export type SignInRes = {
   username: string;
 };
 
+export type GetQuestionRes = {
+  questionId: number;
+  imageUrl: string;
+  choices: Choice[];
+  correctChoiceId: number;
+};
+
+export type PostQuestionAnswerReq = {
+  choiceId: number;
+};
+
+export type Choice = {
+  choiceId: number;
+  text: string;
+};
+
 export type ApiError = {
   error: { code: number; message: string };
 };
