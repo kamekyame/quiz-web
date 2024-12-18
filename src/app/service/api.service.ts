@@ -6,6 +6,7 @@ import {
   ApiError,
   GetQuestionRes,
   PostQuestionAnswerReq,
+  PostStatusReq,
   SignInReq,
   SignInRes,
   SignUpReq,
@@ -50,6 +51,11 @@ export class ApiService {
   /** 問題送信 */
   postAnswer(questionId: number, data: PostQuestionAnswerReq) {
     return this.post('/questions/' + questionId + '/answer', data);
+  }
+
+  /** ステータス送信 */
+  postStatus(data: PostStatusReq) {
+    return this.post('/status', data);
   }
 
   /** 認証付きGETリクエスト */
