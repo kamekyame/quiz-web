@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-finish',
   imports: [],
   templateUrl: './finish.component.html',
-  styleUrl: './finish.component.scss'
+  styleUrl: './finish.component.scss',
 })
-export class FinishComponent {
-
-}
+export class FinishComponent {}

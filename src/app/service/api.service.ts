@@ -27,7 +27,7 @@ export class ApiService {
       .pipe(
         tap((res) => {
           if (!isApiError(res)) this.setToken(res.accessToken);
-        })
+        }),
       );
   }
 
@@ -38,7 +38,7 @@ export class ApiService {
       .pipe(
         tap((res) => {
           if (!isApiError(res)) this.setToken(res.accessToken);
-        })
+        }),
       );
   }
 

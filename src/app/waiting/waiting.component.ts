@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-waiting',
   imports: [],
   templateUrl: './waiting.component.html',
-  styleUrl: './waiting.component.scss'
+  styleUrl: './waiting.component.scss',
 })
-export class WaitingComponent {
-
-}
+export class WaitingComponent {}
