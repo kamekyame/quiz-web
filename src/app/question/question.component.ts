@@ -1,4 +1,4 @@
-import { Component, inject, input } from '@angular/core';
+import { Component, inject, input, OnInit } from '@angular/core';
 import { ApiService, isApiError } from '../service/api.service';
 import { GetQuestionRes } from '../service/api.interface';
 
@@ -8,7 +8,7 @@ import { GetQuestionRes } from '../service/api.interface';
   templateUrl: './question.component.html',
   styleUrl: './question.component.scss',
 })
-export class QuestionComponent {
+export class QuestionComponent implements OnInit {
   api = inject(ApiService);
 
   id = input.required<number>();

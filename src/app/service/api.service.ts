@@ -1,6 +1,6 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import ENV from '../../environments/environment.json';
 import {
   ApiError,
@@ -21,64 +21,57 @@ export class ApiService {
   baseUrl = ENV.API_BASE;
 
   /** 新規登録 */
-  signUp(data: SignUpReq): Observable<SignUpRes | ApiError> {
-    return this.httpClient.post<SignUpRes | ApiError>(
-      this.baseUrl + '/signup',
-      data,
-      {
-        withCredentials: true,
-      }
-    );
+  signUp(data: SignUpReq) {
+    return this.httpClient
+      .post<SignUpRes | ApiError>(this.baseUrl + '/signup', data)
+      .pipe(
+        tap((res) => {
+          if (!isApiError(res)) this.setToken(res.accessToken);
+        }),
+      );
   }
 
   /** ログイン */
-  signIn(data: SignInReq): Observable<SignInRes | ApiError> {
-    return this.httpClient.post<SignInReq>(this.baseUrl + '/signin', data, {
-      withCredentials: true,
-    });
+  signIn(data: SignInReq) {
+    return this.httpClient
+      .post<SignInRes | ApiError>(this.baseUrl + '/signin', data)
+      .pipe(
+        tap((res) => {
+          if (!isApiError(res)) this.setToken(res.accessToken);
+        }),
+      );
   }
 
   /** 問題取得 */
-  getQuestion(id: number): Observable<GetQuestionRes | ApiError> {
-    // いったんダミーのデータ
-    return of({
-      questionId: id,
-      imageUrl: 'https://placehold.jp/150x150.png',
-      choices: [
-        {
-          choiceId: 1,
-          text: 'フライパン',
-        },
-        {
-          choiceId: 2,
-          text: 'フランスパン',
-        },
-        {
-          choiceId: 3,
-          text: '食パン',
-        },
-        {
-          choiceId: 4,
-          text: '肩パン',
-        },
-      ],
-      correctChoiceId: 1,
-    });
-    // return this.httpClient.get<GetQuestionRes | ApiError>(
-    //   this.baseUrl + "/questions/" + id,
-    //   {
-    //     withCredentials: true,
-    //   },
-    // );
+  getQuestion(id: number) {
+    return this.get<GetQuestionRes>('/questions/' + id);
   }
 
+  /** 問題送信 */
   postAnswer(questionId: number, data: PostQuestionAnswerReq) {
-    return of({});
-    // return this.httpClient.post<ApiError>(
-    //   this.baseUrl + '/questions/' + questionId + '/answer',
-    //   data,
-    //   { withCredentials: true }
-    // );
+    return this.post('/questions/' + questionId + '/answer', data);
+  }
+
+  /** 認証付きGETリクエスト */
+  private get<T = {}>(path: string) {
+    return this.httpClient.get<T | ApiError>(this.baseUrl + path, {
+      headers: { Authorization: `Bearer ${this.getToken()}` },
+    });
+  }
+
+  /** 認証付きPOSTリクエスト */
+  private post<T = {}>(path: string, body: any | null) {
+    return this.httpClient.post<T | ApiError>(this.baseUrl + path, body, {
+      headers: { Authorization: `Bearer ${this.getToken()}` },
+    });
+  }
+
+  private setToken(accessToken: string) {
+    localStorage.setItem('token', accessToken);
+  }
+
+  private getToken() {
+    return localStorage.getItem('token');
   }
 }
 
