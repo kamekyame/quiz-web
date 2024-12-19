@@ -4,15 +4,12 @@
   </div>
 
   <div>
-    <div>
-      <input placeholder="question_id" [(ngModel)]="questionId" />
-      <button (click)="sendStatus('open', questionId)">問題出題</button>
-    </div>
+    <input placeholder="question_id" [(ngModel)]="questionId" />
+  </div>
 
-    <div>
-      <input placeholder="question_id" [(ngModel)]="questionId" />
-      <button (click)="sendStatus('close', questionId)">回答締め切り</button>
-    </div>
+  <div class="question-buttons">
+    <button (click)="sendStatus('close', questionId)">回答締め切り</button>
+    <button (click)="sendStatus('open', questionId)">問題出題</button>
   </div>
 
   <div>
