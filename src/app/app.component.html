@@ -1,20 +1,22 @@
-<app-header />
-<h1><a href="/">QuizWeb</a></h1>
+<tui-root>
+  <app-header />
+  <h1><a href="/">QuizWeb</a></h1>
 
-<div>
-  <a [routerLink]="'/finish'">終了画面</a>
-</div>
+  <div>
+    <a [routerLink]="'/finish'">終了画面</a>
+  </div>
 
-<div>
-  <a [routerLink]="'/waiting'">待機画面</a>
-</div>
+  <div>
+    <a [routerLink]="'/waiting'">待機画面</a>
+  </div>
 
-<div>
-  <a [routerLink]="'/control'">管理画面</a>
-</div>
+  <div>
+    <a [routerLink]="'/control'">管理画面</a>
+  </div>
 
-<div>
-  <a [routerLink]="['question', 1]">問題１</a>
-</div>
+  <div>
+    <a [routerLink]="['question', 1]">問題１</a>
+  </div>
 
-<router-outlet />
+  <router-outlet />
+</tui-root>
