@@ -1,6 +1,13 @@
-import { Component, inject, input, OnInit } from '@angular/core';
+import {
+  Component,
+  computed,
+  effect,
+  inject,
+  input,
+  signal,
+} from '@angular/core';
 import { ApiService, isApiError } from '../service/api.service';
-import { GetQuestionRes } from '../service/api.interface';
+import { GetQuestionRes, Status } from '../service/api.interface';
 
 @Component({
   selector: 'app-question',
@@ -8,37 +15,56 @@ import { GetQuestionRes } from '../service/api.interface';
   templateUrl: './question.component.html',
   styleUrl: './question.component.scss',
 })
-export class QuestionComponent implements OnInit {
+export class QuestionComponent {
   api = inject(ApiService);
 
-  id = input.required<number>();
+  nowStatus = input.required<Status>();
 
-  question: GetQuestionRes | undefined;
+  /** 問題のステータス。全体のステータスが waiting や finished のときは close になる */
+  isOpen = computed(() => {
+    const s = this.nowStatus();
+    if (s.status === 'open') return true;
+    else return false;
+  });
+
+  /** 問題番号。全体のステータスが open や close でないときは undefined */
+  questionId = computed(() => {
+    const s = this.nowStatus();
+    if (s.status === 'open' || s.status === 'close') {
+      return s.questionId;
+    } else {
+      return undefined;
+    }
+  });
+
+  question = signal<GetQuestionRes | undefined>(undefined);
 
   result: string | undefined;
 
-  ngOnInit() {
-    this.api.getQuestion(this.id()).subscribe((data) => {
-      if (isApiError(data)) {
-        console.error('問題が取得できませんでした');
-        return;
-      }
-      this.question = data;
-      console.log(data);
+  constructor() {
+    effect(() => {
+      const id = this.questionId();
+      if (id === undefined) return;
+      this.api.getQuestion(id).subscribe((data) => {
+        if (isApiError(data)) {
+          console.error('問題が取得できませんでした');
+          return;
+        }
+        this.question.set(data);
+      });
     });
   }
 
   sendAnswer(choiceId: number) {
-    if (!this.question) return;
-    this.api
-      .postAnswer(this.question.questionId, { choiceId })
-      .subscribe((data) => {
-        if (isApiError(data)) {
-          // エラー処理
-          this.result = `${data.error.message}（${data.error.code}）`;
-          return;
-        }
-        this.result = `解答${choiceId} を送信しました。`;
-      });
+    const question = this.question();
+    if (!question) return;
+    this.api.postAnswer(question.questionId, { choiceId }).subscribe((data) => {
+      if (isApiError(data)) {
+        // エラー処理
+        this.result = `${data.error.message}（${data.error.code}）`;
+        return;
+      }
+      this.result = `解答${choiceId} を送信しました。`;
+    });
   }
 }
