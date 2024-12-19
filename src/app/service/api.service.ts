@@ -82,5 +82,5 @@ export class ApiService {
 }
 
 export function isApiError(data: any): data is ApiError {
-  return 'error' in data;
+  return data && 'error' in data;
 }
