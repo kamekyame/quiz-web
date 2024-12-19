@@ -7,6 +7,7 @@ import {
   GetMeRes,
   GetQuestionRes,
   PostQuestionAnswerReq,
+  PostStatusReq,
   SignInReq,
   SignInRes,
   SignUpReq,
@@ -63,6 +64,11 @@ export class ApiService {
     return this.post('/questions/' + questionId + '/answer', data);
   }
 
+  /** ステータス送信 */
+  postStatus(data: PostStatusReq) {
+    return this.post('/status', data);
+  }
+
   /** 認証付きGETリクエスト */
   private get<T = {}>(path: string) {
     return this.httpClient.get<T | ApiError>(this.baseUrl + path, {
@@ -91,5 +97,5 @@ export class ApiService {
 }
 
 export function isApiError(data: any): data is ApiError {
-  return 'error' in data;
+  return data && 'error' in data;
 }
