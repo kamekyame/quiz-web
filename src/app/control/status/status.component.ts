@@ -13,14 +13,41 @@ export class StatusComponent {
   result: string | undefined;
 
   sendStatus(status: string, questionId?: number) {
-    if (status === 'open' && questionId === null) return;
+    switch (status) {
+      case 'waiting':
+        break;
+      case 'open':
+        if (questionId === undefined) return;
+        break;
+      case 'close':
+        if (questionId === undefined) return;
+        break;
+      case 'finish':
+        break;
+      default:
+        return;
+    }
 
     this.api.postStatus({ status, questionId }).subscribe((data) => {
       if (isApiError(data)) {
         this.result = `${data.error.message} (${data.error.code})`;
         return;
       }
-      this.result = 'ステータスを「待機中」に設定しました';
+
+      switch (status) {
+        case 'waiting':
+          this.result = 'ステータスを「待機中」に設定しました';
+          break;
+        case 'open':
+          this.result = `問題${questionId}を出題しました`;
+          break;
+        case 'close':
+          this.result = `問題${questionId}の回答を締め切りました`;
+          break;
+        case 'finish':
+          this.result = 'ステータスを「終了」に設定しました';
+          break;
+      }
     });
   }
 }
