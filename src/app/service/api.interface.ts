@@ -17,6 +17,11 @@ export type SignInRes = {
   accessToken: string;
 };
 
+export type GetMeRes = {
+  username: string;
+  role: string;
+};
+
 export type GetQuestionRes = {
   questionId: number;
   imageUrl: string;
