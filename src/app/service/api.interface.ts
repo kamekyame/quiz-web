@@ -38,6 +38,10 @@ export type Choice = {
   text: string;
 };
 
+export type Status =
+  | { status: 'waiting' | 'finish' }
+  | { status: 'open' | 'close'; questionId: number };
+
 export type ApiError = {
   error: { code: number; message: string };
 };
