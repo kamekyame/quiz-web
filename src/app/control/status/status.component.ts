@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { ApiService } from '../../service/api.service';
+import { ApiService, isApiError } from '../../service/api.service';
 
 @Component({
   selector: 'app-status',
@@ -10,9 +10,17 @@ import { ApiService } from '../../service/api.service';
 export class StatusComponent {
   api = inject(ApiService);
 
-  sendStatus(status: string, questionId?: number) {
-    if (status === 'open' && questionId === undefined) return;
+  result: string | undefined;
 
-    this.api.postStatus({ status, questionId });
+  sendStatus(status: string, questionId?: number) {
+    if (status === 'open' && questionId === null) return;
+
+    this.api.postStatus({ status, questionId }).subscribe((data) => {
+      if (isApiError(data)) {
+        this.result = `${data.error.message} (${data.error.code})`;
+        return;
+      }
+      this.result = 'ステータスを「待機中」に設定しました';
+    });
   }
 }
