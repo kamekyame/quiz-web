@@ -11,6 +11,7 @@ import {
   SignInRes,
   SignUpReq,
   SignUpRes,
+  Status,
 } from './api.interface';
 
 @Injectable({
@@ -61,6 +62,11 @@ export class ApiService {
   /** 問題送信 */
   postAnswer(questionId: number, data: PostQuestionAnswerReq) {
     return this.post('/questions/' + questionId + '/answer', data);
+  }
+
+  /** ステータス取得 */
+  getStatus() {
+    return this.get<Status>('/status');
   }
 
   /** 認証付きGETリクエスト */

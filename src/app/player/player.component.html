@@ -1,0 +1,7 @@
+@if (status().status === "waiting") {
+  <div>まだ回答は始まっていません</div>
+} @else if (status().status === "finish") {
+  <div>問題は終了しました</div>
+} @else if (status().status === "open" || status().status === "close") {
+  <app-question [nowStatus]="status()" />
+}
