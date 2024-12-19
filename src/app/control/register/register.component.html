@@ -8,9 +8,11 @@
 
   <div>
     <label>
-      <button>問題画像をアップロード</button>
+      <input type="file" accept="image/*" (change)="onChange($event)" />
     </label>
   </div>
+
+  <img [src]="imageSrc" />
 
   <div>
     <label>
