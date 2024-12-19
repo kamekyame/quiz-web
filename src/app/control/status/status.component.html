@@ -4,8 +4,8 @@
   </div>
 
   <div>
-    <input placeholder="question_id" />
-    <button>問題出題</button>
+    <input placeholder="question_id" [(ngModel)]="questionId" />
+    <button (click)="sendStatus('open', questionId)">問題出題</button>
   </div>
 
   <div>
