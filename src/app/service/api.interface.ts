@@ -38,6 +38,11 @@ export type Choice = {
   text: string;
 };
 
+export type PostStatusReq = {
+  status: string;
+  questionId?: number;
+};
+
 export type Status =
   | { status: 'waiting' | 'finish' }
   | { status: 'open' | 'close'; questionId: number };
