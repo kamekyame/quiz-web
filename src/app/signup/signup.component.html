@@ -1,20 +1,20 @@
-<form [formGroup]="formData" (ngSubmit)="submit()">
-  <label>
+<form class="form" [formGroup]="formData" (ngSubmit)="submit()">
+  <label class="label">
     ユーザー名
-    <input [formControlName]="'username'" />
+    <input class="input" [formControlName]="'username'" />
   </label>
 
-  <label>
+  <label class="label">
     パスワード
-    <input [formControlName]="'password'" />
+    <input class="input" [formControlName]="'password'" />
   </label>
 
-  <label>
+  <label class="label">
     招待コード
-    <input [formControlName]="'inviteCode'" />
+    <input class="input" [formControlName]="'inviteCode'" />
   </label>
 
-  <button>新規登録</button>
+  <button class="button">新規登録</button>
 </form>
 
 @if (result) {

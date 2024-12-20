@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { ApiService, isApiError } from '../service/api.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { UserService } from '../service/user.service';
 
 @Component({
   selector: 'app-signin',
@@ -10,6 +11,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 })
 export class SigninComponent {
   api = inject(ApiService);
+  userService = inject(UserService);
 
   formData = new FormGroup({
     username: new FormControl(''),
@@ -31,6 +33,7 @@ export class SigninComponent {
         return;
       }
       this.result = 'ログインに成功しました⭐️';
+      this.userService.update();
     });
   }
 }

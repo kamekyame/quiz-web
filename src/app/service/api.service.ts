@@ -1,15 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { tap } from 'rxjs';
 import ENV from '../../environments/environment.json';
 import {
   ApiError,
+  GetMeRes,
   GetQuestionRes,
   PostQuestionAnswerReq,
+  PostStatusReq,
   SignInReq,
   SignInRes,
   SignUpReq,
   SignUpRes,
+  Status,
 } from './api.interface';
 
 @Injectable({
@@ -42,6 +45,16 @@ export class ApiService {
       );
   }
 
+  signOut() {
+    this.removeToken();
+    this.post('/signout', null);
+  }
+
+  /** 自分の情報取得 */
+  getMe() {
+    return this.get<GetMeRes>('/me');
+  }
+
   /** 問題取得 */
   getQuestion(id: number) {
     return this.get<GetQuestionRes>('/questions/' + id);
@@ -50,6 +63,16 @@ export class ApiService {
   /** 問題送信 */
   postAnswer(questionId: number, data: PostQuestionAnswerReq) {
     return this.post('/questions/' + questionId + '/answer', data);
+  }
+
+  /** ステータス送信 */
+  postStatus(data: PostStatusReq) {
+    return this.post('/status', data);
+  }
+
+  /** ステータス取得 */
+  getStatus() {
+    return this.get<Status>('/status');
   }
 
   /** 認証付きGETリクエスト */
@@ -73,8 +96,12 @@ export class ApiService {
   private getToken() {
     return localStorage.getItem('token');
   }
+
+  private removeToken() {
+    localStorage.removeItem('token');
+  }
 }
 
 export function isApiError(data: any): data is ApiError {
-  return 'error' in data;
+  return data && 'error' in data;
 }
