@@ -6,10 +6,11 @@ import { WaitingComponent } from './waiting/waiting.component';
 import { ControlComponent } from './control/control.component';
 import { RegisterComponent } from './control/register/register.component';
 import { StatusComponent } from './control/status/status.component';
-import { QuestionComponent } from './question/question.component';
+import { PlayerComponent } from './player/player.component';
 import { ProjectorComponent } from './projector/projector.component';
 
 export const routes: Routes = [
+  { path: '', component: PlayerComponent },
   {
     path: 'signup',
     component: SignupComponent,
@@ -39,10 +40,6 @@ export const routes: Routes = [
         component: StatusComponent,
       },
     ],
-  },
-  {
-    path: 'question/:id',
-    component: QuestionComponent,
   },
   {
     path: 'projector',
