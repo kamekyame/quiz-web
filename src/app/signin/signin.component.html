@@ -1,15 +1,15 @@
-<form [formGroup]="formData" (ngSubmit)="submit()">
-  <label>
+<form class="form" [formGroup]="formData" (ngSubmit)="submit()">
+  <label class="label">
     ユーザー名
-    <input [formControlName]="'username'" />
+    <input class="input" [formControlName]="'username'" />
   </label>
 
-  <label>
+  <label class="label">
     パスワード
-    <input [formControlName]="'password'" type="password" />
+    <input class="input" [formControlName]="'password'" type="password" />
   </label>
 
-  <button>ログイン</button>
+  <button class="button">ログイン</button>
 </form>
 
 @if (result) {
