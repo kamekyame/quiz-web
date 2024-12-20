@@ -1,4 +1,5 @@
 import { inject, Injectable, signal } from '@angular/core';
+import { mergeMap, of } from 'rxjs';
 import { ApiService, isApiError } from './api.service';
 
 export type User = {
@@ -18,16 +19,23 @@ export class UserService {
 
   constructor() {
     // 初期化時にログイン状態を確認
-    this.update();
+    this.update().subscribe();
   }
 
   /** ユーザー情報更新 */
   update() {
     // エラーだったら未ログイン、データが帰ってきたらログイン済み
-    this.api.getMe().subscribe((data) => {
-      if (isApiError(data)) this.user.set(null);
-      else this.user.set(data);
-    });
+    return this.api.getMe().pipe(
+      mergeMap((data) => {
+        if (isApiError(data)) {
+          this.user.set(null);
+          return of(undefined);
+        } else {
+          this.user.set(data);
+          return of(data);
+        }
+      }),
+    );
   }
 
   /** サインアウト */

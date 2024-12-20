@@ -35,7 +35,7 @@ export class SignupComponent {
         return;
       }
       this.result = data.username + ' で新規登録が完了しました🎉';
-      this.userService.update();
+      this.userService.update().subscribe();
     });
   }
 }

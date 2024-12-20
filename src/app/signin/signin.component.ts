@@ -33,7 +33,7 @@ export class SigninComponent {
         return;
       }
       this.result = 'ログインに成功しました⭐️';
-      this.userService.update();
+      this.userService.update().subscribe();
     });
   }
 }
