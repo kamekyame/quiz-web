@@ -1,6 +1,6 @@
+<app-header />
 <h1><a href="/">QuizWeb</a></h1>
 
-<a [routerLink]="'/signup'">新規登録</a>
 <div>
   <a [routerLink]="'/finish'">終了画面</a>
 </div>
@@ -10,15 +10,11 @@
 </div>
 
 <div>
-  <a [routerLink]="'/signin'">ログイン</a>
-</div>
-
-<div>
   <a [routerLink]="'/control'">管理画面</a>
 </div>
 
 <div>
-  <a [routerLink]="['question', 1]">問題１</a>
+  <a [routerLink]="'/projector'">プロジェクター用</a>
 </div>
 
 <router-outlet />
