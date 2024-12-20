@@ -3,10 +3,12 @@ import { ApiService, isApiError } from '../service/api.service';
 import { interval, Subscription } from 'rxjs';
 import { Status } from '../service/api.interface';
 import { QuestionComponent } from '../question/question.component';
+import { WaitingComponent } from '../waiting/waiting.component';
+import { FinishComponent } from '../finish/finish.component';
 
 @Component({
   selector: 'app-player',
-  imports: [QuestionComponent],
+  imports: [QuestionComponent, WaitingComponent, FinishComponent],
   templateUrl: './player.component.html',
   styleUrl: './player.component.scss',
 })
