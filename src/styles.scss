@@ -1,1 +1,11 @@
 @import "./reset.css";
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  // レイアウトがわかりやすいように仮にグレーに設定
+  background-color: gray;
+}
