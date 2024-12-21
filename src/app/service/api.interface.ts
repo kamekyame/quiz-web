@@ -43,6 +43,13 @@ export type PostStatusReq = {
   questionId?: number;
 };
 
+export type PostQuestionReq = {
+  questionId: number;
+  imageUrl: string;
+  choices: Choice[];
+  correctChoiceId: number;
+};
+
 export type Status =
   | { status: 'waiting' | 'finish' }
   | { status: 'open' | 'close'; questionId: number };
