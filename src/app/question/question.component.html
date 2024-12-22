@@ -1,6 +1,6 @@
 @if (question(); as question) {
   <h2>問題{{ question.questionId }}</h2>
-  <img [src]="question.imageUrl" />
+  <img [appAuthSrc]="question.imageUrl" [alt]="'問題画像'" />
   <h2>選択肢</h2>
   @for (choice of question.choices; track choice.choiceId) {
     <button (click)="sendAnswer(choice.choiceId)" [disabled]="!isOpen()">

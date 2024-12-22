@@ -27,8 +27,7 @@ export class HeaderComponent {
   signout() {
     if (window.confirm('サインアウトしますか？')) {
       this.userService.signout();
-      this.router.navigate(['/']);
-      window.location.reload();
+      window.location.href = '/';
     }
   }
 }
