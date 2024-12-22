@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { UserService } from '../service/user.service';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ApiService } from '../service/api.service';
 
 @Component({
@@ -10,10 +10,13 @@ import { ApiService } from '../service/api.service';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
+  router = inject(Router);
   apiService = inject(ApiService);
   userService = inject(UserService);
 
   signout() {
     this.userService.signout();
+    this.router.navigate(['/']);
+    window.location.reload();
   }
 }
