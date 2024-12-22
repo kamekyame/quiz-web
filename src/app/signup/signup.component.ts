@@ -3,7 +3,6 @@ import { ApiService, isApiError } from '../service/api.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from '../service/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
