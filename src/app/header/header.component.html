@@ -14,19 +14,14 @@
   }
   <div class="spacer"></div>
 
-  @if (this.userService.user() !== undefined) {
+  @if (this.userService.user(); as user) {
     <div>
-      @if (this.userService.user(); as user) {
-        <div class="username" (dblclick)="signout()">
-          <span>{{ user.username }}</span>
-          @if (user.role === "ADMIN") {
-            <span class="role">管理者</span>
-          }
-        </div>
-      } @else {
-        <a [routerLink]="'signup'">新規登録</a>
-        <a [routerLink]="'signin'">ログイン</a>
-      }
+      <div class="username" (dblclick)="signout()">
+        <span>{{ user.username }}</span>
+        @if (user.role === "ADMIN") {
+          <span class="role">管理者</span>
+        }
+      </div>
     </div>
   }
 </header>
