@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
   router = inject(Router);
 
   isMobileLayout = signal(true);
+  isProjector = signal(false);
 
   ngOnInit() {
     // 管理画面等は幅を制限しない
@@ -25,6 +26,12 @@ export class AppComponent implements OnInit {
           this.isMobileLayout.set(false);
         } else {
           this.isMobileLayout.set(true);
+        }
+
+        if (url.includes('projector')) {
+          this.isProjector.set(true);
+        } else {
+          this.isProjector.set(false);
         }
       });
   }

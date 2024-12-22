@@ -1,5 +1,7 @@
 <div class="container" [class.mobile-layout]="isMobileLayout()">
-  <app-header />
+  @if (!isProjector()) {
+    <app-header />
+  }
   <h1><a href="/">QuizWeb</a></h1>
 
   <router-outlet />
