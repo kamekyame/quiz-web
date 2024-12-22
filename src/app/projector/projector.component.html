@@ -1,7 +1,7 @@
 @if (status().status === "waiting") {
   <app-screen-waiting></app-screen-waiting>
 } @else if (status().status === "open") {
-  <app-screen-open></app-screen-open>
+  <app-screen-open [nowStatus]="status()"></app-screen-open>
 } @else if (status().status === "close") {
   <app-screen-close></app-screen-close>
 } @else if (status().status === "finish") {
