@@ -81,6 +81,13 @@ export class ApiService {
     return this.post('/questions', data);
   }
 
+  getImage(url: string) {
+    return this.httpClient.get(url, {
+      headers: { Authorization: `Bearer ${this.getToken()}` },
+      responseType: 'blob',
+    });
+  }
+
   /** 認証付きGETリクエスト */
   private get<T = {}>(path: string) {
     return this.httpClient.get<T | ApiError>(this.baseUrl + path, {
