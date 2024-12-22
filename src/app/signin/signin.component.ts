@@ -35,8 +35,7 @@ export class SigninComponent {
         return;
       }
       this.result = 'ログインに成功しました⭐️';
-      this.userService.update().subscribe();
-      this.router.navigate(['/']);
+      window.location.href = '/';
     });
   }
 }

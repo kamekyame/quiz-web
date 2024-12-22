@@ -14,7 +14,7 @@ import { mergeMap, of } from 'rxjs';
 
 const adminGuard: CanActivateFn = () => {
   const userService = inject(UserService);
-  return userService.update().pipe(
+  return userService.getUser().pipe(
     mergeMap((data) => {
       if (data?.role === 'ADMIN') return of(true);
       else return of(false);
@@ -25,9 +25,8 @@ const adminGuard: CanActivateFn = () => {
 const loginGuard: CanActivateFn = () => {
   const userService = inject(UserService);
   const router = inject(Router);
-  return userService.update().pipe(
+  return userService.getUser().pipe(
     mergeMap((data) => {
-      console.log(data);
       if (data) return of(true);
       else {
         return of(router.parseUrl('signup'));

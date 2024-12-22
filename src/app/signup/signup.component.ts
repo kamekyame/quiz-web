@@ -44,8 +44,7 @@ export class SignupComponent implements OnInit {
         return;
       }
       this.result = data.username + ' で新規登録が完了しました🎉';
-      this.userService.update().subscribe();
-      this.router.navigate(['/']);
+      window.location.href = '/';
     });
   }
 }
