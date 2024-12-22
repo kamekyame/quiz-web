@@ -1,0 +1,17 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.container {
+  background-color: white;
+  height: 100%;
+}
+
+// プレイヤー画面用のスマホレイアウト（PCで見ても縦長になるように）
+.mobile-layout {
+  width: 100%;
+  max-width: 450px;
+  align-self: center;
+}

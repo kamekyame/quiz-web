@@ -2,7 +2,8 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ApiService, isApiError } from '../service/api.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from '../service/user.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -12,6 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class SignupComponent implements OnInit {
   route = inject(ActivatedRoute);
+  router = inject(Router);
   api = inject(ApiService);
   userService = inject(UserService);
 
@@ -43,7 +45,8 @@ export class SignupComponent implements OnInit {
         return;
       }
       this.result = data.username + ' で新規登録が完了しました🎉';
-      this.userService.update();
+      this.userService.update().subscribe();
+      this.router.navigate(['/']);
     });
   }
 }
