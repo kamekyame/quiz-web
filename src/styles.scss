@@ -9,3 +9,9 @@ body {
   // レイアウトがわかりやすいように仮にグレーに設定
   background-color: gray;
 }
+
+// aタグのスタイルをリセット
+a {
+  text-decoration: none;
+  color: inherit;
+}
