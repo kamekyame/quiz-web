@@ -1,6 +1,6 @@
 import { Component, inject, input, signal } from '@angular/core';
 import { ApiService, isApiError } from '../service/api.service';
-import { Status } from '../service/api.interface';
+import { GetQuestionForProjectorRes, Status } from '../service/api.interface';
 import { interval, Subscription } from 'rxjs';
 import { ScreenCloseComponent } from './screen-close/screen-close.component';
 import { ScreenOpenComponent } from './screen-open/screen-open.component';
@@ -22,6 +22,8 @@ export class ProjectorComponent {
   api = inject(ApiService);
 
   pollingSubscription: Subscription | undefined;
+
+  nowQuestion = signal<GetQuestionForProjectorRes | undefined>(undefined);
 
   status = signal<Status>(
     { status: 'waiting' },
@@ -47,5 +49,9 @@ export class ProjectorComponent {
         this.pollingSubscription?.unsubscribe();
       }
     });
+  }
+
+  getQuestionEvent(question: GetQuestionForProjectorRes) {
+    this.nowQuestion.set(question);
   }
 }

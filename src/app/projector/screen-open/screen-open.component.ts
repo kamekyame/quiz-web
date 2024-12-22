@@ -4,6 +4,7 @@ import {
   effect,
   inject,
   input,
+  output,
   signal,
 } from '@angular/core';
 import { ApiService, isApiError } from '../../service/api.service';
@@ -22,6 +23,7 @@ export class ScreenOpenComponent {
   api = inject(ApiService);
 
   nowStatus = input.required<Status>();
+  nowQuestion = output<GetQuestionForProjectorRes>();
 
   questionId = computed(() => {
     const s = this.nowStatus();
@@ -46,6 +48,7 @@ export class ScreenOpenComponent {
           return;
         }
         this.question.set(data);
+        this.nowQuestion.emit(data);
       });
     });
   }
