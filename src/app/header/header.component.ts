@@ -25,8 +25,10 @@ export class HeaderComponent {
   });
 
   signout() {
-    this.userService.signout();
-    this.router.navigate(['/']);
-    window.location.reload();
+    if (window.confirm('サインアウトしますか？')) {
+      this.userService.signout();
+      this.router.navigate(['/']);
+      window.location.reload();
+    }
   }
 }

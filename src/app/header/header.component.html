@@ -17,8 +17,9 @@
   @if (this.userService.user() !== undefined) {
     <div>
       @if (this.userService.user(); as user) {
-        <div class="username">{{ user.username }}（{{ user.role }}）</div>
-        <button class="logout" (click)="signout()">ログアウト</button>
+        <div class="username" (dblclick)="signout()">
+          {{ user.username }}（{{ user.role }}）
+        </div>
       } @else {
         <a [routerLink]="'signup'">新規登録</a>
         <a [routerLink]="'signin'">ログイン</a>
