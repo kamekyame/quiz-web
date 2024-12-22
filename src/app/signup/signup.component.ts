@@ -1,8 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ApiService, isApiError } from '../service/api.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from '../service/user.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -10,7 +10,8 @@ import { Router } from '@angular/router';
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss',
 })
-export class SignupComponent {
+export class SignupComponent implements OnInit {
+  route = inject(ActivatedRoute);
   router = inject(Router);
   api = inject(ApiService);
   userService = inject(UserService);
@@ -22,6 +23,12 @@ export class SignupComponent {
   });
 
   result = '';
+
+  ngOnInit() {
+    this.route.queryParamMap.subscribe((param) => {
+      this.formData.patchValue({ inviteCode: param.get('inviteCode') ?? '' });
+    });
+  }
 
   submit() {
     console.log(this.formData.value);
