@@ -37,8 +37,9 @@ export class SignupComponent {
         return;
       }
       this.result = data.username + ' で新規登録が完了しました🎉';
-      this.userService.update().subscribe();
-      this.router.navigate(['/']);
+      this.router.navigate(['/']).then(() => {
+        window.location.reload();
+      });
     });
   }
 }
