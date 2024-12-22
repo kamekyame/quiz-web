@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { ApiService, isApiError } from '../service/api.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from '../service/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signin',
@@ -10,6 +11,7 @@ import { UserService } from '../service/user.service';
   styleUrl: './signin.component.scss',
 })
 export class SigninComponent {
+  router = inject(Router);
   api = inject(ApiService);
   userService = inject(UserService);
 
@@ -34,6 +36,7 @@ export class SigninComponent {
       }
       this.result = 'ログインに成功しました⭐️';
       this.userService.update().subscribe();
+      this.router.navigate(['/']);
     });
   }
 }
