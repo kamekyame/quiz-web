@@ -17,7 +17,7 @@ export class HeaderComponent {
   signout() {
     this.userService.signout();
     this.router.navigate(['/']).then(() => {
-    window.location.reload();
+      window.location.reload();
     });
   }
 }
