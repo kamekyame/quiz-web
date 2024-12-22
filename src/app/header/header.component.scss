@@ -24,3 +24,14 @@ header {
 .spacer {
   flex: 1;
 }
+
+.username {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: right;
+
+  .role {
+    font-size: 12px;
+  }
+}
