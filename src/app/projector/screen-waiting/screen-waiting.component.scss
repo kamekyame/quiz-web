@@ -1,0 +1,29 @@
+.screen-waiting-body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.screen-waiting-loading {
+  width: 24rem;
+  height: 24rem;
+  border-radius: 50%;
+  border: 1.6em solid var(--color-primary);
+  border-top-color: #d3d3d3;
+  animation: spinner 1.5s linear infinite;
+}
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.screen-waiting-text {
+  font-size: 64px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  color: black;
+}
