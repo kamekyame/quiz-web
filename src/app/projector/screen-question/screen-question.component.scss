@@ -1,0 +1,36 @@
+.screen-question-body {
+  height: 100%;
+  margin: 0px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  gap: 64px;
+}
+
+.screen-question-image {
+  border-radius: 8px;
+  object-fit: contain;
+}
+
+.screen-question-choice-title {
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: black;
+}
+
+.screen-question-choice-container {
+  width: 100%;
+}
+
+.screen-question-choice {
+  padding: 12px 16px;
+  margin: 8px 0px;
+  border: solid 2px var(--color-primary);
+  border-radius: 8px;
+  font-size: 64px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: black;
+  background-color: white;
+}
