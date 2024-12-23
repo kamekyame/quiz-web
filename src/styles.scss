@@ -1,1 +1,17 @@
-/* You can add global styles to this file, and also import other style files */
+@import "./reset.css";
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  // レイアウトがわかりやすいように仮にグレーに設定
+  background-color: gray;
+}
+
+// aタグのスタイルをリセット
+a {
+  text-decoration: none;
+  color: inherit;
+}

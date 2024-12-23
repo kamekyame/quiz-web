@@ -1,49 +1,52 @@
-<form>
+<form class="form" [formGroup]="formData" (ngSubmit)="register()">
   <div>
     <label>
       問題ID
-      <input />
+      <input [formControlName]="'questionId'" />
     </label>
   </div>
 
   <div>
     <label>
-      <button>問題画像をアップロード</button>
+      画像URL
+      <input [formControlName]="'imageUrl'" />
     </label>
   </div>
 
-  <div>
-    <label>
-      選択肢1
-      <input />
-    </label>
-  </div>
+  <div [formGroup]="choices">
+    <div>
+      <label>
+        選択肢1
+        <input [formControlName]="'choice_1'" />
+      </label>
+    </div>
 
-  <div>
-    <label>
-      選択肢2
-      <input />
-    </label>
-  </div>
+    <div>
+      <label>
+        選択肢2
+        <input [formControlName]="'choice_2'" />
+      </label>
+    </div>
 
-  <div>
-    <label>
-      選択肢3
-      <input />
-    </label>
-  </div>
+    <div>
+      <label>
+        選択肢3
+        <input [formControlName]="'choice_3'" />
+      </label>
+    </div>
 
-  <div>
-    <label>
-      選択肢4
-      <input />
-    </label>
+    <div>
+      <label>
+        選択肢4
+        <input [formControlName]="'choice_4'" />
+      </label>
+    </div>
   </div>
 
   <div>
     <label>
       正解
-      <select>
+      <select [formControlName]="'correctChoiceId'">
         <option value=""></option>
         <option value="1">1</option>
         <option value="2">2</option>
@@ -55,3 +58,7 @@
 
   <button>登録</button>
 </form>
+
+@if (result) {
+  <div>{{ result }}</div>
+}

@@ -31,6 +31,9 @@ export class StatusComponent {
         return;
     }
 
+    if (status === 'finish' && !window.confirm('ゲームを終了しますか？'))
+      return;
+
     // string から number に変換
     const parseQuestionId =
       questionId === undefined ? undefined : parseInt(questionId!);

@@ -1,20 +1,8 @@
-<app-header />
-<h1><a href="/">QuizWeb</a></h1>
+<div class="container" [class.mobile-layout]="isMobileLayout()">
+  @if (!isProjector()) {
+    <app-header />
+  }
+  <h1><a href="/">QuizWeb</a></h1>
 
-<div>
-  <a [routerLink]="'/finish'">終了画面</a>
+  <router-outlet />
 </div>
-
-<div>
-  <a [routerLink]="'/waiting'">待機画面</a>
-</div>
-
-<div>
-  <a [routerLink]="'/control'">管理画面</a>
-</div>
-
-<div>
-  <a [routerLink]="'/projector'">プロジェクター用</a>
-</div>
-
-<router-outlet />

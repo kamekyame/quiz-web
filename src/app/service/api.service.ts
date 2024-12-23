@@ -7,6 +7,7 @@ import {
   GetMeRes,
   GetQuestionRes,
   PostQuestionAnswerReq,
+  PostQuestionReq,
   PostStatusReq,
   SignInReq,
   SignInRes,
@@ -73,6 +74,18 @@ export class ApiService {
   /** ステータス取得 */
   getStatus() {
     return this.get<Status>('/status');
+  }
+
+  /** 問題の登録（管理画面） */
+  postQuestion(data: PostQuestionReq) {
+    return this.post('/questions', data);
+  }
+
+  getImage(url: string) {
+    return this.httpClient.get(url, {
+      headers: { Authorization: `Bearer ${this.getToken()}` },
+      responseType: 'blob',
+    });
   }
 
   /** 認証付きGETリクエスト */

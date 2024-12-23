@@ -1,11 +1,27 @@
 <header>
-  @if (this.userService.user() !== undefined) {
-    @if (this.userService.user(); as user) {
-      <div class="username">{{ user.username }}</div>
-      <button class="logout" (click)="signout()">ログアウト</button>
-    } @else {
-      <a [routerLink]="'signup'">新規登録</a>
-      <a [routerLink]="'signin'">ログイン</a>
-    }
+  @if (isAdmin()) {
+    <div class="links">
+      <a class="link" [routerLink]="'/control'">
+        <ng-icon name="faSolidScrewdriverWrench" />
+        <span>管理画面</span>
+      </a>
+
+      <a class="link" [routerLink]="'/projector'">
+        <ng-icon name="faSolidDisplay" />
+        <span>プロジェクター用</span>
+      </a>
+    </div>
+  }
+  <div class="spacer"></div>
+
+  @if (this.userService.user(); as user) {
+    <div>
+      <div class="username" (dblclick)="signout()">
+        <span>{{ user.username }}</span>
+        @if (user.role === "ADMIN") {
+          <span class="role">管理者</span>
+        }
+      </div>
+    </div>
   }
 </header>
