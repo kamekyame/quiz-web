@@ -1,9 +1,7 @@
 import { Component, inject, input, signal } from '@angular/core';
 import { ApiService, isApiError } from '../service/api.service';
-import { GetQuestionForProjectorRes, Status } from '../service/api.interface';
+import { Status } from '../service/api.interface';
 import { interval, Subscription } from 'rxjs';
-import { ScreenCloseComponent } from './screen-close/screen-close.component';
-import { ScreenOpenComponent } from './screen-open/screen-open.component';
 import { ScreenFinishComponent } from './screen-finish/screen-finish.component';
 import { ScreenWaitingComponent } from './screen-waiting/screen-waiting.component';
 import { ScreenQuestionComponent } from './screen-question/screen-question.component';

@@ -1,9 +1,0 @@
-@if (question(); as question) {
-  <h2>問題{{ question.questionId }}</h2>
-  <img [src]="question.imageUrl" />
-  <h2>選択肢</h2>
-  @for (choice of question.choices; track choice.choiceId) {
-    <h2>{{ choice.choiceId }}：{{ choice.text }}</h2>
-  }
-  <p>正解は{{ question.correctChoiceId }}でした</p>
-}
