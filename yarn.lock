@@ -1880,6 +1880,20 @@
     "@napi-rs/nice-win32-ia32-msvc" "1.0.1"
     "@napi-rs/nice-win32-x64-msvc" "1.0.1"
 
+"@ng-icons/core@^29.10.0":
+  version "29.10.0"
+  resolved "https://registry.yarnpkg.com/@ng-icons/core/-/core-29.10.0.tgz#04f98a8ac2bba77d263cc1864e5a6ae0f00c5935"
+  integrity sha512-PR6SO00yvFhwDhh37BWhtAgRfzxuXpJQBsAQ44Pg3gjc83fOAwOtMSXizYwtN0uUFIkAYZHZCEuV7Sb8eosK+w==
+  dependencies:
+    tslib "^2.3.0"
+
+"@ng-icons/font-awesome@^29.10.0":
+  version "29.10.0"
+  resolved "https://registry.yarnpkg.com/@ng-icons/font-awesome/-/font-awesome-29.10.0.tgz#39663b05e397a11ba82a4c365c3a13a57d80000c"
+  integrity sha512-lxT4xuC3F9txO7AujR7UIgC9okt2ld+mlQRSdrFURht+c/7huOvFtqQVlE3UUlvEBdjyTBC4yE9SH4eH97sbVQ==
+  dependencies:
+    tslib "^2.3.0"
+
 "@ngtools/webpack@19.0.5":
   version "19.0.5"
   resolved "https://registry.yarnpkg.com/@ngtools/webpack/-/webpack-19.0.5.tgz#4a18f718b269dfc443a07fcc86d780c5494e1e9f"

@@ -1,14 +1,8 @@
 <div class="container" [class.mobile-layout]="isMobileLayout()">
-  <app-header />
+  @if (!isProjector()) {
+    <app-header />
+  }
   <h1><a href="/">QuizWeb</a></h1>
-
-  <div>
-    <a [routerLink]="'/control'">管理画面</a>
-  </div>
-
-  <div>
-    <a [routerLink]="'/projector'">プロジェクター用</a>
-  </div>
 
   <router-outlet />
 </div>

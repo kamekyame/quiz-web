@@ -82,6 +82,13 @@ export class ApiService {
     return this.post('/questions', data);
   }
 
+  getImage(url: string) {
+    return this.httpClient.get(url, {
+      headers: { Authorization: `Bearer ${this.getToken()}` },
+      responseType: 'blob',
+    });
+  }
+
   /** 問題の取得（プロジェクター用） */
   getQuestionForProjector(id: number) {
     return this.get<GetQuestionForProjectorRes>('/questions/admin/' + id);

@@ -8,10 +8,11 @@ import {
 } from '@angular/core';
 import { ApiService, isApiError } from '../service/api.service';
 import { GetQuestionRes, Status } from '../service/api.interface';
+import { AuthImageDirective } from '../directive/auth-image.directive';
 
 @Component({
   selector: 'app-question',
-  imports: [],
+  imports: [AuthImageDirective],
   templateUrl: './question.component.html',
   styleUrl: './question.component.scss',
 })
