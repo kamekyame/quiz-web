@@ -6,14 +6,14 @@ import { ScreenCloseComponent } from './screen-close/screen-close.component';
 import { ScreenOpenComponent } from './screen-open/screen-open.component';
 import { ScreenFinishComponent } from './screen-finish/screen-finish.component';
 import { ScreenWaitingComponent } from './screen-waiting/screen-waiting.component';
+import { ScreenQuestionComponent } from './screen-question/screen-question.component';
 
 @Component({
   selector: 'app-projector',
   imports: [
-    ScreenCloseComponent,
-    ScreenOpenComponent,
     ScreenFinishComponent,
     ScreenWaitingComponent,
+    ScreenQuestionComponent,
   ],
   templateUrl: './projector.component.html',
   styleUrl: './projector.component.scss',
@@ -22,8 +22,6 @@ export class ProjectorComponent {
   api = inject(ApiService);
 
   pollingSubscription: Subscription | undefined;
-
-  nowQuestion = signal<GetQuestionForProjectorRes | undefined>(undefined);
 
   status = signal<Status>(
     { status: 'waiting' },
@@ -49,9 +47,5 @@ export class ProjectorComponent {
         this.pollingSubscription?.unsubscribe();
       }
     });
-  }
-
-  getQuestionEvent(question: GetQuestionForProjectorRes) {
-    this.nowQuestion.set(question);
   }
 }

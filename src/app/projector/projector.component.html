@@ -1,12 +1,7 @@
 @if (status().status === "waiting") {
   <app-screen-waiting></app-screen-waiting>
-} @else if (status().status === "open") {
-  <app-screen-open
-    [nowStatus]="status()"
-    (nowQuestion)="getQuestionEvent($event)"
-  ></app-screen-open>
-} @else if (status().status === "close") {
-  <app-screen-close [nowQuestion]="nowQuestion()"></app-screen-close>
+} @else if (status().status === "open" || status().status === "close") {
+  <app-screen-question [nowStatus]="status()"></app-screen-question>
 } @else if (status().status === "finish") {
   <app-screen-finish></app-screen-finish>
 }
