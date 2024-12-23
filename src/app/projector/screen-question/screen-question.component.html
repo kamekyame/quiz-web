@@ -1,0 +1,15 @@
+@if (question(); as question) {
+  <img [appAuthSrc]="question.imageUrl" />
+  <h2>選択肢</h2>
+  @for (choice of question.choices; track choice.choiceId) {
+    <h2>{{ choice.choiceId }}：{{ choice.text }}</h2>
+  }
+
+  @if (nowStatus().status === "close") {
+    <h2>正解は{{ question.correctChoiceId }}でした！</h2>
+  }
+
+  @if (result) {
+    <div>{{ result }}</div>
+  }
+}
