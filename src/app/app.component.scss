@@ -7,6 +7,12 @@
 .container {
   background-color: white;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .content {
+    flex: 1;
+  }
 }
 
 // プレイヤー画面用のスマホレイアウト（PCで見ても縦長になるように）
@@ -14,4 +20,8 @@
   width: 100%;
   max-width: 450px;
   align-self: center;
+
+  .content {
+    height: calc(100% - 32px);
+  }
 }

@@ -9,12 +9,15 @@ import {
 import { ApiService, isApiError } from '../service/api.service';
 import { GetQuestionRes, Status } from '../service/api.interface';
 import { AuthImageDirective } from '../directive/auth-image.directive';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { faSolidQ } from '@ng-icons/font-awesome/solid';
 
 @Component({
   selector: 'app-question',
-  imports: [AuthImageDirective],
+  imports: [AuthImageDirective, NgIcon],
   templateUrl: './question.component.html',
   styleUrl: './question.component.scss',
+  viewProviders: [provideIcons({ faSolidQ })],
 })
 export class QuestionComponent {
   api = inject(ApiService);
@@ -42,6 +45,8 @@ export class QuestionComponent {
 
   result: string | undefined;
 
+  selectId = signal<number | undefined>(undefined);
+
   constructor() {
     effect(() => {
       const id = this.questionId();
@@ -59,13 +64,18 @@ export class QuestionComponent {
   sendAnswer(choiceId: number) {
     const question = this.question();
     if (!question) return;
+    const oldChoiceId = this.selectId();
+    this.selectId.set(choiceId);
+    this.result = '';
     this.api.postAnswer(question.questionId, { choiceId }).subscribe((data) => {
       if (isApiError(data)) {
         // エラー処理
         this.result = `${data.error.message}（${data.error.code}）`;
+        this.selectId.set(oldChoiceId);
         return;
       }
-      this.result = `解答${choiceId} を送信しました。`;
+      const choice = question.choices.find((c) => c.choiceId === choiceId);
+      this.result = `${choice?.text} を選択中`;
     });
   }
 }

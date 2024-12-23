@@ -1,16 +1,30 @@
 @if (question(); as question) {
-  <h2>問題{{ question.questionId }}</h2>
-  <img [appAuthSrc]="question.imageUrl" [alt]="'問題画像'" />
-  <h2>選択肢</h2>
-  @for (choice of question.choices; track choice.choiceId) {
-    <button (click)="sendAnswer(choice.choiceId)" [disabled]="!isOpen()">
-      {{ choice.choiceId }}：{{ choice.text }}
-    </button>
-  }
-  @if (result) {
-    <div>{{ result }}</div>
-  }
-  @if (!isOpen()) {
-    <div>回答を締め切りました</div>
-  }
+  <div class="question">
+    <ng-icon class="icon-q" name="faSolidQ" />これだれ？
+  </div>
+  <div class="next-question-timer">次の問題まで ◯</div>
+  <div class="image-container">
+    <img class="image" [appAuthSrc]="question.imageUrl" [alt]="'問題画像'" />
+  </div>
+  <div class="answers">
+    @for (choice of question.choices; track choice.choiceId) {
+      <button
+        class="button"
+        [class.select]="selectId() === choice.choiceId"
+        (click)="sendAnswer(choice.choiceId)"
+        [disabled]="!isOpen()"
+      >
+        {{ choice.text }}
+      </button>
+    }
+  </div>
+
+  <div class="log">
+    @if (result) {}
+    @if (!isOpen()) {
+      回答を締め切りました
+    } @else if (result) {
+      {{ result }}
+    }
+  </div>
 }
