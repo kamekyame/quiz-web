@@ -1,4 +1,23 @@
 <div>
+  <div class="status-now-status">
+    <h3>現在のステータス</h3>
+    @switch (nowStatus()?.status) {
+      @case ("waiting") {
+        <div>待機中</div>
+      }
+      @case ("open") {
+        <div>question_id：{{ questionId }} を出題中</div>
+      }
+      @case ("close") {
+        <div>question_id：{{ questionId }} の回答を締め切り</div>
+      }
+      @case ("finish") {
+        <div>ゲーム終了</div>
+      }
+      @default {}
+    }
+  </div>
+
   <div>
     <button (click)="sendStatus('waiting')">待機</button>
   </div>
