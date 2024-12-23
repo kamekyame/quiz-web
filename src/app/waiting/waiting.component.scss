@@ -1,0 +1,28 @@
+.waiting-body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.waiting-loading {
+  width: 12rem;
+  height: 12rem;
+  border-radius: 50%;
+  border: 0.8em solid var(--color-primary);
+  border-top-color: #d3d3d3;
+  animation: spinner 1.5s linear infinite;
+}
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.waiting-text {
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: black;
+}
