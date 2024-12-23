@@ -27,6 +27,7 @@ export class SignupComponent implements OnInit {
   ngOnInit() {
     this.route.queryParamMap.subscribe((param) => {
       this.formData.patchValue({ inviteCode: param.get('inviteCode') ?? '' });
+      this.formData.get('inviteCode')?.disable();
     });
   }
 
