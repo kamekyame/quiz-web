@@ -1,6 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { ApiService, isApiError } from '../../service/api.service';
 import { FormsModule } from '@angular/forms';
+import { Status } from '../../service/api.interface';
 
 @Component({
   selector: 'app-status',
@@ -14,6 +15,8 @@ export class StatusComponent {
   result: string | undefined;
 
   questionId: string | undefined;
+
+  nowStatus = signal<Status | undefined>(undefined);
 
   sendStatus(status: string, questionId?: string) {
     switch (status) {
@@ -49,15 +52,25 @@ export class StatusComponent {
         switch (status) {
           case 'waiting':
             this.result = 'ステータスを「待機中」に設定しました';
+            this.nowStatus.set({ status: 'waiting' });
             break;
           case 'open':
             this.result = `問題${questionId}を出題しました`;
+            this.nowStatus.set({
+              status: 'open',
+              questionId: parseQuestionId!,
+            });
             break;
           case 'close':
             this.result = `問題${questionId}の回答を締め切りました`;
+            this.nowStatus.set({
+              status: 'close',
+              questionId: parseQuestionId!,
+            });
             break;
           case 'finish':
             this.result = 'ステータスを「終了」に設定しました';
+            this.nowStatus.set({ status: 'finish' });
             break;
         }
       });
