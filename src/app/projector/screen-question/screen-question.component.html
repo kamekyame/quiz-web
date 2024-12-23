@@ -6,16 +6,18 @@
     <div class="screen-question-choice-container">
       <p class="screen-question-choice-title">選択肢</p>
       @for (choice of question.choices; track choice.choiceId) {
-        <div class="screen-question-choice">
+        <div
+          class="screen-question-choice"
+          [class.not-answer]="
+            nowStatus().status === 'close' &&
+            choice.choiceId !== question.correctChoiceId
+          "
+        >
           <p>{{ choice.choiceId }}：{{ choice.text }}</p>
         </div>
       }
     </div>
   </div>
-
-  @if (nowStatus().status === "close") {
-    <h2>正解は{{ question.correctChoiceId }}でした！</h2>
-  }
 
   @if (result) {
     <div>{{ result }}</div>

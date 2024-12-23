@@ -33,4 +33,10 @@
   letter-spacing: 2px;
   color: black;
   background-color: white;
+
+  &.not-answer {
+    background-color: var(--color-disabled);
+    border-color: var(--color-disabled);
+    color: white;
+  }
 }
