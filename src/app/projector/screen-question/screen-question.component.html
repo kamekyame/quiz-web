@@ -23,7 +23,9 @@
 
           <div class="screen-question-text-container">
             <p>{{ choice.text }}</p>
-            <p>{{ getCount(choice.choiceId) }}</p>
+            @if (nowStatus().status === "close") {
+              <p>{{ getCount(choice.choiceId) }}</p>
+            }
           </div>
         </div>
       }
