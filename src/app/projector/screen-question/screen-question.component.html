@@ -20,10 +20,11 @@
             class="screen-question-choice-overlay"
             [style.width]="'calc(' + getCount(choice.choiceId) + '%)'"
           ></div>
-          <p>
-            {{ choice.text }}
-            {{ getCountText(choice.choiceId) }}
-          </p>
+
+          <div class="screen-question-text-container">
+            <p>{{ choice.text }}</p>
+            <p>{{ getCountText(choice.choiceId) }}</p>
+          </div>
         </div>
       }
     </div>

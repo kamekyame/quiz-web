@@ -98,6 +98,6 @@ export class ScreenQuestionComponent {
     if (answers === undefined) return '';
     const answer = answers.answers.find((a) => a.choiceId === choiceId);
 
-    return '：' + (answer ? answer.count : 0);
+    return answer ? answer.count : 0;
   }
 }
