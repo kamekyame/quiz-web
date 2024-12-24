@@ -27,6 +27,11 @@
   padding: 10px;
   background-color: #ddd;
   text-align: center;
+
+  .remaining-time {
+    color: var(--color-primary);
+    font-weight: bold;
+  }
 }
 
 .image-container {

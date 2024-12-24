@@ -11,6 +11,7 @@ import { GetQuestionRes, Status } from '../service/api.interface';
 import { AuthImageDirective } from '../directive/auth-image.directive';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidQ } from '@ng-icons/font-awesome/solid';
+import { forkJoin, interval, Subscription, tap, timer } from 'rxjs';
 
 @Component({
   selector: 'app-question',
@@ -47,6 +48,10 @@ export class QuestionComponent {
 
   selectId = signal<number | undefined>(undefined);
 
+  INITIAL_REMAINING_TIME = 30;
+  remainingTime = signal(this.INITIAL_REMAINING_TIME);
+  remainingTimeTimer: Subscription | undefined = undefined;
+
   constructor() {
     effect(() => {
       const id = this.questionId();
@@ -58,6 +63,18 @@ export class QuestionComponent {
         }
         this.question.set(data);
       });
+    });
+
+    effect(() => {
+      const isOpen = this.isOpen();
+      if (!isOpen) {
+        this.remainingTimeTimer?.unsubscribe();
+      } else {
+        this.remainingTime.set(this.INITIAL_REMAINING_TIME);
+        this.remainingTimeTimer = interval(1000).subscribe(() => {
+          this.remainingTime.update((time) => Math.floor(time - 1));
+        });
+      }
     });
   }
 
