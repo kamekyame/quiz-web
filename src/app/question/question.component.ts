@@ -11,6 +11,7 @@ import { GetQuestionRes, Status } from '../service/api.interface';
 import { AuthImageDirective } from '../directive/auth-image.directive';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidQ } from '@ng-icons/font-awesome/solid';
+import { forkJoin, interval, Subscription, tap, timer } from 'rxjs';
 
 @Component({
   selector: 'app-question',
@@ -47,6 +48,12 @@ export class QuestionComponent {
 
   selectId = signal<number | undefined>(undefined);
 
+  INITIAL_REMAINING_TIME = 30;
+  remainingTime = signal(this.INITIAL_REMAINING_TIME);
+  remainingTimeTimer: Subscription | undefined = undefined;
+
+  sending = signal(false);
+
   constructor() {
     effect(() => {
       const id = this.questionId();
@@ -59,6 +66,18 @@ export class QuestionComponent {
         this.question.set(data);
       });
     });
+
+    effect(() => {
+      const isOpen = this.isOpen();
+      if (!isOpen) {
+        this.remainingTimeTimer?.unsubscribe();
+      } else {
+        this.remainingTime.set(this.INITIAL_REMAINING_TIME);
+        this.remainingTimeTimer = interval(1000).subscribe(() => {
+          this.remainingTime.update((time) => Math.floor(time - 1));
+        });
+      }
+    });
   }
 
   sendAnswer(choiceId: number) {
@@ -66,16 +85,25 @@ export class QuestionComponent {
     if (!question) return;
     const oldChoiceId = this.selectId();
     this.selectId.set(choiceId);
-    this.result = '';
-    this.api.postAnswer(question.questionId, { choiceId }).subscribe((data) => {
-      if (isApiError(data)) {
-        // エラー処理
-        this.result = `${data.error.message}（${data.error.code}）`;
-        this.selectId.set(oldChoiceId);
-        return;
-      }
-      const choice = question.choices.find((c) => c.choiceId === choiceId);
-      this.result = `${choice?.text} を選択中`;
+    this.sending.set(true);
+    this.result = '送信中…';
+    const postObserver = this.api
+      .postAnswer(question.questionId, { choiceId })
+      .pipe(
+        tap((data) => {
+          if (isApiError(data)) {
+            // エラー処理
+            this.result = `${data.error.message}（${data.error.code}）`;
+            this.selectId.set(oldChoiceId);
+            return;
+          }
+          const choice = question.choices.find((c) => c.choiceId === choiceId);
+          this.result = `${choice?.text} を選択中`;
+        }),
+      );
+
+    forkJoin([postObserver, timer(2000)]).subscribe(() => {
+      this.sending.set(false);
     });
   }
 }
