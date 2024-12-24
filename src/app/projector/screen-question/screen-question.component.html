@@ -12,7 +12,10 @@
             choice.choiceId !== question.correctChoiceId
           "
         >
-          <p>{{ choice.text }}</p>
+          <p>
+            {{ choice.text }}
+            {{ getCountText(choice.choiceId) }}
+          </p>
         </div>
       }
     </div>

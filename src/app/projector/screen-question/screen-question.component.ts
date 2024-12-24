@@ -50,6 +50,7 @@ export class ScreenQuestionComponent {
     effect(() => {
       const id = this.questionId();
       if (id === undefined) return;
+      this.answers.set(undefined);
       this.api.getQuestionForProjector(id).subscribe((data) => {
         if (isApiError(data)) {
           this.result = `${data.error.message} (${data.error.code})`;
@@ -78,5 +79,15 @@ export class ScreenQuestionComponent {
       this.answers.set(data);
       console.log(data);
     });
+  }
+
+  // 選択肢の回答数を取得
+  // 回答が存在しないときは 0 を返す
+  getCountText(choiceId: number) {
+    const answers = this.answers();
+    if (answers === undefined) return '';
+    const answer = answers.answers.find((a) => a.choiceId === choiceId);
+
+    return '：' + (answer ? answer.count : 0);
   }
 }
