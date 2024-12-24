@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { ApiService, isApiError } from '../../service/api.service';
 import {
+  GetAnswersRes,
   GetQuestionForProjectorRes,
   Status,
 } from '../../service/api.interface';
@@ -24,6 +25,12 @@ export class ScreenQuestionComponent {
 
   nowStatus = input.required<Status>();
 
+  isOpen = computed(() => {
+    const s = this.nowStatus();
+    if (s.status === 'open') return true;
+    else return false;
+  });
+
   questionId = computed(() => {
     const s = this.nowStatus();
     if (s.status === 'open' || s.status === 'close') {
@@ -34,6 +41,8 @@ export class ScreenQuestionComponent {
   });
 
   question = signal<GetQuestionForProjectorRes | undefined>(undefined);
+
+  answers = signal<GetAnswersRes | undefined>(undefined);
 
   result: string | undefined;
 
@@ -48,6 +57,26 @@ export class ScreenQuestionComponent {
         }
         this.question.set(data);
       });
+    });
+
+    effect(() => {
+      const isOpen = this.isOpen();
+      if (!isOpen) {
+        if (this.questionId() !== undefined) {
+          this.getAnswers(this.questionId()!);
+        }
+      }
+    });
+  }
+
+  getAnswers(questionId: number) {
+    this.api.getAnswers(questionId).subscribe((data) => {
+      if (isApiError(data)) {
+        this.result = `${data.error.message} (${data.error.code})`;
+        return;
+      }
+      this.answers.set(data);
+      console.log(data);
     });
   }
 }
