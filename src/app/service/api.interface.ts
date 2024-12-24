@@ -57,6 +57,15 @@ export type GetQuestionForProjectorRes = {
   correctChoiceId: number;
 };
 
+export type Answer = {
+  choiceId: number;
+  count: number;
+};
+
+export type GetAnswersRes = {
+  answers: Answer[];
+};
+
 export type Status =
   | { status: 'waiting' | 'finish' }
   | { status: 'open' | 'close'; questionId: number };
