@@ -1,13 +1,22 @@
 @if (question(); as question) {
-  <img [appAuthSrc]="question.imageUrl" />
-  <h2>選択肢</h2>
-  @for (choice of question.choices; track choice.choiceId) {
-    <h2>{{ choice.choiceId }}：{{ choice.text }}</h2>
-  }
-
-  @if (nowStatus().status === "close") {
-    <h2>正解は{{ question.correctChoiceId }}でした！</h2>
-  }
+  <div class="screen-question-body">
+    <div class="screen-question-image-container">
+      <img class="screen-question-image" [appAuthSrc]="question.imageUrl" />
+    </div>
+    <div class="screen-question-choice-container">
+      @for (choice of question.choices; track choice.choiceId) {
+        <div
+          class="screen-question-choice"
+          [class.not-answer]="
+            nowStatus().status === 'close' &&
+            choice.choiceId !== question.correctChoiceId
+          "
+        >
+          <p>{{ choice.text }}</p>
+        </div>
+      }
+    </div>
+  </div>
 
   @if (result) {
     <div>{{ result }}</div>
