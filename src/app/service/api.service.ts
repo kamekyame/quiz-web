@@ -5,6 +5,7 @@ import ENV from '../../environments/environment.json';
 import {
   ApiError,
   GetMeRes,
+  GetQuestionForProjectorRes,
   GetQuestionRes,
   PostQuestionAnswerReq,
   PostQuestionReq,
@@ -86,6 +87,11 @@ export class ApiService {
       headers: { Authorization: `Bearer ${this.getToken()}` },
       responseType: 'blob',
     });
+  }
+
+  /** 問題の取得（プロジェクター用） */
+  getQuestionForProjector(id: number) {
+    return this.get<GetQuestionForProjectorRes>('/questions/admin/' + id);
   }
 
   /** 認証付きGETリクエスト */

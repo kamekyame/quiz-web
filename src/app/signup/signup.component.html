@@ -1,26 +1,39 @@
-<form class="form" [formGroup]="formData" (ngSubmit)="submit()">
-  <label class="label">
-    ユーザー名
-    <input class="input" [formControlName]="'username'" />
-  </label>
+<div>
+  <form class="form" [formGroup]="formData" (ngSubmit)="submit()">
+    <div class="input-container">
+      <label for="username" class="label">ユーザー名</label>
+      <input id="username" class="input" [formControlName]="'username'" />
+      <div class="helper-text">
+        {{
+          "※ Slack の表示名 または、メールアドレスの @ 以前 でお願いいたします"
+        }}
+      </div>
+    </div>
 
-  <label class="label">
-    パスワード
-    <input class="input" [formControlName]="'password'" />
-  </label>
+    <div class="input-container">
+      <label for="password" class="label">パスワード</label>
+      <input
+        id="password"
+        class="input"
+        [formControlName]="'password'"
+        type="password"
+      />
+      <div class="helper-text">※ 32文字以下、半角英数字</div>
+    </div>
 
-  <label class="label">
-    招待コード
-    <input class="input" [formControlName]="'inviteCode'" />
-  </label>
+    <div class="input-container">
+      <label for="invitecode" class="label">招待コード</label>
+      <input id="invitecode" class="input" [formControlName]="'inviteCode'" />
+    </div>
 
-  <button class="button">新規登録</button>
-</form>
+    @if (result) {
+      <div class="error-message">{{ result }}</div>
+    }
 
-@if (result) {
-  <div>{{ result }}</div>
-}
+    <button class="button filled">新規登録</button>
+  </form>
 
-<div class="signin-link">
-  <a [routerLink]="'/signin'">すでにアカウントをお持ちの方</a>
+  <div class="signin-link">
+    <a [routerLink]="'/signin'">すでにアカウントをお持ちの方</a>
+  </div>
 </div>

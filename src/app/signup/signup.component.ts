@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { ApiService, isApiError } from '../service/api.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from '../service/user.service';
@@ -23,15 +23,24 @@ export class SignupComponent implements OnInit {
   });
 
   result = '';
+  sending = signal(false);
 
   ngOnInit() {
     this.route.queryParamMap.subscribe((param) => {
-      this.formData.patchValue({ inviteCode: param.get('inviteCode') ?? '' });
+      const inviteCode = param.get('inviteCode');
+      if (inviteCode) {
+        this.formData.patchValue({ inviteCode });
+        this.formData.get('inviteCode')?.disable();
+      }
+    });
+
+    this.formData.valueChanges.subscribe(() => {
+      this.result = '';
     });
   }
 
   submit() {
-    console.log(this.formData.value);
+    this.sending.set(true);
     const data = {
       username: this.formData.value.username ?? '',
       password: this.formData.value.password ?? '',
@@ -40,10 +49,10 @@ export class SignupComponent implements OnInit {
 
     this.api.signUp(data).subscribe((res) => {
       if (isApiError(res)) {
-        this.result = `新規登録に失敗しました。${res.error.message}（${res.error.code}）`;
+        this.result = `${res.error.message}（${res.error.code}）`;
+        this.sending.set(false);
         return;
       }
-      this.result = data.username + ' で新規登録が完了しました🎉';
       window.location.href = '/';
     });
   }

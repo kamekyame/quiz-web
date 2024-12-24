@@ -50,6 +50,13 @@ export type PostQuestionReq = {
   correctChoiceId: number;
 };
 
+export type GetQuestionForProjectorRes = {
+  questionId: number;
+  imageUrl: string;
+  choices: Choice[];
+  correctChoiceId: number;
+};
+
 export type Status =
   | { status: 'waiting' | 'finish' }
   | { status: 'open' | 'close'; questionId: number };

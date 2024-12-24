@@ -1,21 +1,28 @@
-<form class="form" [formGroup]="formData" (ngSubmit)="submit()">
-  <label class="label">
-    ユーザー名
-    <input class="input" [formControlName]="'username'" />
-  </label>
+<div>
+  <form class="form" [formGroup]="formData" (ngSubmit)="submit()">
+    <div class="input-container">
+      <label for="username" class="label">ユーザー名</label>
+      <input id="username" class="input" [formControlName]="'username'" />
+    </div>
 
-  <label class="label">
-    パスワード
-    <input class="input" [formControlName]="'password'" type="password" />
-  </label>
+    <div class="input-container">
+      <label for="password" class="label">パスワード</label>
+      <input
+        id="password"
+        class="input"
+        [formControlName]="'password'"
+        type="password"
+      />
+    </div>
 
-  <button class="button">ログイン</button>
-</form>
+    @if (result) {
+      <div class="error-message">{{ result }}</div>
+    }
 
-@if (result) {
-  <div>{{ result }}</div>
-}
+    <button class="button filled" [disabled]="sending()">ログイン</button>
+  </form>
 
-<div class="signup-link">
-  <a [routerLink]="'/signup'">まだアカウントをお持ちでない方</a>
+  <div class="signup-link">
+    <a [routerLink]="'/signup'">まだアカウントをお持ちでない方</a>
+  </div>
 </div>
