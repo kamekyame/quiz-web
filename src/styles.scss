@@ -62,7 +62,7 @@ a {
     border: 2px solid var(--color-border);
     border-radius: 4px;
     height: 36px;
-    outline-color: var(--color-primary);
+    outline-offset: -2px;
     padding: 0 16px;
     width: 100%;
   }
@@ -76,4 +76,9 @@ a {
 
 * {
   box-sizing: border-box;
+
+  &:focus-visible {
+    outline: solid 2px var(--color-primary);
+    outline-offset: 2px;
+  }
 }
