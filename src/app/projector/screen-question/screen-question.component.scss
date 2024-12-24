@@ -24,6 +24,7 @@
 }
 
 .screen-question-choice {
+  position: relative;
   padding: 12px 16px;
   margin: 8px 0px;
   border: solid 2px var(--color-primary);
@@ -44,5 +45,16 @@
     background-color: var(--color-disabled);
     border-color: var(--color-disabled);
     color: white;
+  }
+
+  .screen-question-choice-overlay {
+    position: absolute;
+    width: 0%;
+    background-color: black;
+    opacity: 30%;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
   }
 }

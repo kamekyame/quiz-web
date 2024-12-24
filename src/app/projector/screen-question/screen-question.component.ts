@@ -83,6 +83,16 @@ export class ScreenQuestionComponent {
 
   // 選択肢の回答数を取得
   // 回答が存在しないときは 0 を返す
+  getCount(choiceId: number) {
+    const answers = this.answers();
+    if (answers === undefined) return 0;
+    const answer = answers.answers.find((a) => a.choiceId === choiceId);
+
+    return answer ? answer.count : 0;
+  }
+
+  // 選択肢の回答数を取得
+  // 回答が存在しないときは 0 を返す
   getCountText(choiceId: number) {
     const answers = this.answers();
     if (answers === undefined) return '';

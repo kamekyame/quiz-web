@@ -16,6 +16,10 @@
             choice.choiceId !== question.correctChoiceId
           "
         >
+          <div
+            class="screen-question-choice-overlay"
+            [style.width]="'calc(' + getCount(choice.choiceId) + '%)'"
+          ></div>
           <p>
             {{ choice.text }}
             {{ getCountText(choice.choiceId) }}
