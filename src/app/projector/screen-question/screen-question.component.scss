@@ -34,6 +34,12 @@
   color: black;
   background-color: white;
 
+  &.answer {
+    background-color: rgb(73, 255, 56);
+    border-color: var(--color-primary);
+    color: black;
+  }
+
   &.not-answer {
     background-color: var(--color-disabled);
     border-color: var(--color-disabled);

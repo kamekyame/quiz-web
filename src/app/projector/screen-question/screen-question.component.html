@@ -7,6 +7,10 @@
       @for (choice of question.choices; track choice.choiceId) {
         <div
           class="screen-question-choice"
+          [class.answer]="
+            nowStatus().status === 'close' &&
+            choice.choiceId === question.correctChoiceId
+          "
           [class.not-answer]="
             nowStatus().status === 'close' &&
             choice.choiceId !== question.correctChoiceId
