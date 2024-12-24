@@ -52,6 +52,8 @@ export class QuestionComponent {
   remainingTime = signal(this.INITIAL_REMAINING_TIME);
   remainingTimeTimer: Subscription | undefined = undefined;
 
+  sending = signal(false);
+
   constructor() {
     effect(() => {
       const id = this.questionId();
@@ -83,16 +85,25 @@ export class QuestionComponent {
     if (!question) return;
     const oldChoiceId = this.selectId();
     this.selectId.set(choiceId);
-    this.result = '';
-    this.api.postAnswer(question.questionId, { choiceId }).subscribe((data) => {
-      if (isApiError(data)) {
-        // エラー処理
-        this.result = `${data.error.message}（${data.error.code}）`;
-        this.selectId.set(oldChoiceId);
-        return;
-      }
-      const choice = question.choices.find((c) => c.choiceId === choiceId);
-      this.result = `${choice?.text} を選択中`;
+    this.sending.set(true);
+    this.result = '送信中…';
+    const postObserver = this.api
+      .postAnswer(question.questionId, { choiceId })
+      .pipe(
+        tap((data) => {
+          if (isApiError(data)) {
+            // エラー処理
+            this.result = `${data.error.message}（${data.error.code}）`;
+            this.selectId.set(oldChoiceId);
+            return;
+          }
+          const choice = question.choices.find((c) => c.choiceId === choiceId);
+          this.result = `${choice?.text} を選択中`;
+        }),
+      );
+
+    forkJoin([postObserver, timer(2000)]).subscribe(() => {
+      this.sending.set(false);
     });
   }
 }
