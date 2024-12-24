@@ -4,7 +4,6 @@
       <img class="screen-question-image" [appAuthSrc]="question.imageUrl" />
     </div>
     <div class="screen-question-choice-container">
-      <p class="screen-question-choice-title">選択肢</p>
       @for (choice of question.choices; track choice.choiceId) {
         <div
           class="screen-question-choice"
@@ -13,7 +12,7 @@
             choice.choiceId !== question.correctChoiceId
           "
         >
-          <p>{{ choice.choiceId }}：{{ choice.text }}</p>
+          <p>{{ choice.text }}</p>
         </div>
       }
     </div>
