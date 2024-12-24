@@ -1,1 +1,6 @@
-<button class="delete-button">⚠️ すべての回答状況をリセット</button>
+<button class="delete-button" (click)="deleteAnswers()">
+  ⚠️ すべての回答状況をリセット
+</button>
+@if (result) {
+  <div>{{ result }}</div>
+}
