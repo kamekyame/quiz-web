@@ -18,7 +18,9 @@
         >
           <div
             class="screen-question-choice-overlay"
-            [style.width]="'calc(' + getCount(choice.choiceId) + '%)'"
+            [style.width]="
+              'calc(' + (getCount(choice.choiceId) / 57) * 100 + '%)'
+            "
           ></div>
 
           <div class="screen-question-text-container">
