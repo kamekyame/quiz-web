@@ -15,7 +15,7 @@ import {
 } from '../../service/api.interface';
 import { AuthImageDirective } from '../../directive/auth-image.directive';
 import { ProjectorService } from '../../service/projector.service';
-import { Subscription } from 'rxjs';
+import { fromEvent, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-screen-question',
@@ -80,6 +80,16 @@ export class ScreenQuestionComponent implements OnDestroy {
     this.subscription.add(
       this.projectorService.messageEvent().subscribe((message) => {
         if (message === 'showAnswers') {
+          this.showAnswers();
+        }
+      }),
+    );
+
+    this.subscription.add(
+      fromEvent<KeyboardEvent>(window, 'keydown').subscribe((event) => {
+        console.log(event);
+        if (event.key === 's') {
+          // show の s
           this.showAnswers();
         }
       }),
