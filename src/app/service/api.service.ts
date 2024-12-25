@@ -104,6 +104,7 @@ export class ApiService {
   /** 各選択肢の回答数の取得（プロジェクター用） */
   getAnswers(questionId: number) {
     return this.get<GetAnswersRes>('/questions/' + questionId + '/answers');
+  }
 
   /** ランキングの取得 */
   getRanking() {
