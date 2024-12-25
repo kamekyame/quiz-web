@@ -64,6 +64,7 @@ export class QuestionComponent {
           return;
         }
         this.question.set(data);
+        this.selectId.set(undefined);
       });
     });
 
