@@ -1,1 +1,6 @@
-<p>delete-user works!</p>
+<button class="delete-user-button" (click)="deleteUser()">
+  ⚠️ すべてのユーザー登録をリセット
+</button>
+@if (result) {
+  <div>{{ result }}</div>
+}
