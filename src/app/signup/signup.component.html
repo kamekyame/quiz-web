@@ -2,7 +2,12 @@
   <form class="form" [formGroup]="formData" (ngSubmit)="submit()">
     <div class="input-container">
       <label for="username" class="label">ユーザー名</label>
-      <input id="username" class="input" [formControlName]="'username'" />
+      <input
+        id="username"
+        class="input"
+        autocapitalize="off"
+        [formControlName]="'username'"
+      />
       <div class="helper-text">
         {{
           "※ Slack の表示名 または、メールアドレスの @ 以前 でお願いいたします"

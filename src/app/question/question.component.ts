@@ -48,7 +48,7 @@ export class QuestionComponent {
 
   selectId = signal<number | undefined>(undefined);
 
-  INITIAL_REMAINING_TIME = 30;
+  INITIAL_REMAINING_TIME = 10;
   remainingTime = signal(this.INITIAL_REMAINING_TIME);
   remainingTimeTimer: Subscription | undefined = undefined;
 
@@ -64,6 +64,7 @@ export class QuestionComponent {
           return;
         }
         this.question.set(data);
+        this.selectId.set(undefined);
       });
     });
 
