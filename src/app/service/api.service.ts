@@ -4,9 +4,11 @@ import { tap } from 'rxjs';
 import ENV from '../../environments/environment.json';
 import {
   ApiError,
+  GetAnswersRes,
   GetMeRes,
   GetQuestionForProjectorRes,
   GetQuestionRes,
+  GetRanking,
   PostQuestionAnswerReq,
   PostQuestionReq,
   PostStatusReq,
@@ -94,6 +96,20 @@ export class ApiService {
     return this.get<GetQuestionForProjectorRes>('/questions/admin/' + id);
   }
 
+  /** すべての回答状況をリセット */
+  deleteAnswer() {
+    return this.delete('/answers');
+  }
+
+  /** 各選択肢の回答数の取得（プロジェクター用） */
+  getAnswers(questionId: number) {
+    return this.get<GetAnswersRes>('/questions/' + questionId + '/answers');
+
+  /** ランキングの取得 */
+  getRanking() {
+    return this.get<GetRanking>("/ranking");
+  }
+
   /** 認証付きGETリクエスト */
   private get<T = {}>(path: string) {
     return this.httpClient.get<T | ApiError>(this.baseUrl + path, {
@@ -104,6 +120,13 @@ export class ApiService {
   /** 認証付きPOSTリクエスト */
   private post<T = {}>(path: string, body: any | null) {
     return this.httpClient.post<T | ApiError>(this.baseUrl + path, body, {
+      headers: { Authorization: `Bearer ${this.getToken()}` },
+    });
+  }
+
+  /** 認証付きDELETEリクエスト */
+  private delete<T = {}>(path: string) {
+    return this.httpClient.delete<T | ApiError>(this.baseUrl + path, {
       headers: { Authorization: `Bearer ${this.getToken()}` },
     });
   }

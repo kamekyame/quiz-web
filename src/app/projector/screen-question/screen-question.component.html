@@ -7,16 +7,45 @@
       @for (choice of question.choices; track choice.choiceId) {
         <div
           class="screen-question-choice"
+          [class.answer]="
+            nowStatus().status === 'close' &&
+            isShowAnswer() &&
+            choice.choiceId === question.correctChoiceId
+          "
           [class.not-answer]="
             nowStatus().status === 'close' &&
+            isShowAnswer() &&
             choice.choiceId !== question.correctChoiceId
           "
         >
-          <p>{{ choice.text }}</p>
+          <div
+            class="screen-question-choice-overlay"
+            [style.width]="
+              'calc(' + (getCount(choice.choiceId) / 57) * 100 + '%)'
+            "
+          ></div>
+
+          <div class="screen-question-text-container">
+            <p>{{ choice.text }}</p>
+            @if (nowStatus().status === "close") {
+              <p>{{ getCount(choice.choiceId) }}</p>
+            }
+          </div>
         </div>
       }
     </div>
   </div>
+
+  @if (nowStatus().status === "close") {
+    <div class="screen-question-show-answer-button-container">
+      <button
+        class="screen-question-show-answer-button"
+        (click)="showAnswers()"
+      >
+        回答を表示
+      </button>
+    </div>
+  }
 
   @if (result) {
     <div>{{ result }}</div>

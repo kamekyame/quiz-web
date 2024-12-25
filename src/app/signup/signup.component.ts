@@ -42,9 +42,9 @@ export class SignupComponent implements OnInit {
   submit() {
     this.sending.set(true);
     const data = {
-      username: this.formData.value.username ?? '',
-      password: this.formData.value.password ?? '',
-      inviteCode: this.formData.value.inviteCode ?? '',
+      username: this.formData.getRawValue().username ?? '',
+      password: this.formData.getRawValue().password ?? '',
+      inviteCode: this.formData.getRawValue().inviteCode ?? '',
     };
 
     this.api.signUp(data).subscribe((res) => {
