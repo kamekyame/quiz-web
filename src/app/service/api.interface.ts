@@ -66,6 +66,12 @@ export type GetAnswersRes = {
   answers: Answer[];
 };
 
+export type GetRanking = {
+  rank: number;
+  username: string;
+  score: number;
+}
+
 export type Status =
   | { status: 'waiting' | 'finish' }
   | { status: 'open' | 'close'; questionId: number };
