@@ -4,6 +4,7 @@ import {
   effect,
   inject,
   input,
+  OnDestroy,
   signal,
 } from '@angular/core';
 import { ApiService, isApiError } from '../../service/api.service';
@@ -13,6 +14,8 @@ import {
   Status,
 } from '../../service/api.interface';
 import { AuthImageDirective } from '../../directive/auth-image.directive';
+import { ProjectorService } from '../../service/projector.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-screen-question',
@@ -20,8 +23,11 @@ import { AuthImageDirective } from '../../directive/auth-image.directive';
   templateUrl: './screen-question.component.html',
   styleUrl: './screen-question.component.scss',
 })
-export class ScreenQuestionComponent {
+export class ScreenQuestionComponent implements OnDestroy {
   api = inject(ApiService);
+  projectorService = inject(ProjectorService);
+
+  subscription = new Subscription();
 
   nowStatus = input.required<Status>();
 
@@ -70,6 +76,18 @@ export class ScreenQuestionComponent {
         }
       }
     });
+
+    this.subscription.add(
+      this.projectorService.messageEvent().subscribe((message) => {
+        if (message === 'showAnswers') {
+          this.showAnswers();
+        }
+      }),
+    );
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   getAnswers(questionId: number) {
