@@ -7,6 +7,10 @@ import { fromEvent, mergeMap } from 'rxjs';
 export class ProjectorService {
   private targetWindow: Window | null = null;
 
+  serviceEnable() {
+    return this.targetWindow !== null;
+  }
+
   setWindow(window: Window | null) {
     this.targetWindow = window;
   }
