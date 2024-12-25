@@ -45,12 +45,14 @@ export class ScreenQuestionComponent {
   answers = signal<GetAnswersRes | undefined>(undefined);
 
   result: string | undefined;
+  isShowAnswer = signal<boolean>(false);
 
   constructor() {
     effect(() => {
       const id = this.questionId();
       if (id === undefined) return;
       this.answers.set(undefined);
+      this.isShowAnswer.set(false);
       this.api.getQuestionForProjector(id).subscribe((data) => {
         if (isApiError(data)) {
           this.result = `${data.error.message} (${data.error.code})`;
@@ -88,5 +90,9 @@ export class ScreenQuestionComponent {
     const answer = answers.answers.find((a) => a.choiceId === choiceId);
 
     return answer ? answer.count : 0;
+  }
+
+  showAnswers() {
+    this.isShowAnswer.set(true);
   }
 }

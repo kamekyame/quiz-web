@@ -9,10 +9,12 @@
           class="screen-question-choice"
           [class.answer]="
             nowStatus().status === 'close' &&
+            isShowAnswer() &&
             choice.choiceId === question.correctChoiceId
           "
           [class.not-answer]="
             nowStatus().status === 'close' &&
+            isShowAnswer() &&
             choice.choiceId !== question.correctChoiceId
           "
         >
@@ -33,6 +35,17 @@
       }
     </div>
   </div>
+
+  @if (nowStatus().status === "close") {
+    <div class="screen-question-show-answer-button-container">
+      <button
+        class="screen-question-show-answer-button"
+        (click)="showAnswers()"
+      >
+        回答を表示
+      </button>
+    </div>
+  }
 
   @if (result) {
     <div>{{ result }}</div>

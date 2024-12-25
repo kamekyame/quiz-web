@@ -64,3 +64,21 @@
   justify-content: space-between;
   margin: 0px 64px;
 }
+
+.screen-question-show-answer-button-container {
+  position: absolute;
+  padding: 8px 16px;
+  bottom: 10%;
+}
+
+.screen-question-show-answer-button {
+  margin: 0px 16px;
+  padding: 8px 16px;
+  border: solid 2px var(--color-primary);
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: black;
+  background-color: white;
+}
