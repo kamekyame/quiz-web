@@ -121,6 +121,7 @@ export class ScreenQuestionComponent implements OnDestroy {
   }
 
   showAnswers() {
+    if (this.nowStatus().status !== 'close') return;
     this.isShowAnswer.set(true);
   }
 }
