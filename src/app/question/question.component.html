@@ -17,6 +17,7 @@
       <button
         class="button"
         [class.select]="selectId() === choice.choiceId"
+        [class.open]="isOpen()"
         (click)="sendAnswer(choice.choiceId)"
         [disabled]="!isOpen() || sending()"
       >
