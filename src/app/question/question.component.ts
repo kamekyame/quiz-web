@@ -64,7 +64,10 @@ export class QuestionComponent {
           return;
         }
         this.question.set(data);
+        this.result = '';
         this.selectId.set(undefined);
+        this.remainingTime.set(this.INITIAL_REMAINING_TIME);
+        this.sending.set(false);
       });
     });
 
