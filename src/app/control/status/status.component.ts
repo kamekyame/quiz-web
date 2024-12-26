@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { ApiService, isApiError } from '../../service/api.service';
 import { FormsModule } from '@angular/forms';
 import { Status } from '../../service/api.interface';
@@ -19,6 +19,16 @@ export class StatusComponent {
   questionId: string | undefined;
 
   nowStatus = signal<Status | undefined>(undefined);
+  nowQuestionId = computed(() => {
+    const s = this.nowStatus();
+    if (s === undefined) {
+      return undefined;
+    } else if (s.status === 'open' || s.status === 'close') {
+      return s.questionId;
+    } else {
+      return undefined;
+    }
+  });
 
   sendStatus(status: string, questionId?: string) {
     switch (status) {
