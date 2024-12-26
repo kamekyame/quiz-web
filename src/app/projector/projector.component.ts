@@ -28,7 +28,7 @@ export class ProjectorComponent {
 
   ngOnInit() {
     // ポーリングでステータスを取得
-    this.pollingSubscription = interval(3000).subscribe(() => {
+    this.pollingSubscription = interval(500).subscribe(() => {
       this.updateStatus();
     });
     this.updateStatus();
