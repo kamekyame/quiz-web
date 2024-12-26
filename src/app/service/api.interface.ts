@@ -67,7 +67,7 @@ export type GetAnswersRes = {
 };
 
 export type Status =
-  | { status: 'waiting' | 'finish' }
+  | { status: 'waiting' | 'finish' | 'before' }
   | { status: 'open' | 'close'; questionId: number };
 
 export type ApiError = {
