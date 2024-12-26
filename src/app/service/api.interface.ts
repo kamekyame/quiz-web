@@ -67,9 +67,11 @@ export type GetAnswersRes = {
 };
 
 export type GetRanking = {
-  rank: number;
-  username: string;
-  score: number;
+  ranking: {
+    rank: number;
+    username: string;
+    score: number;
+  }[]
 }
 
 export type Status =
