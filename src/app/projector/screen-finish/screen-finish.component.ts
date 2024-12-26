@@ -3,10 +3,14 @@ import { gsap } from "gsap";
 import { ApiService, isApiError } from '../../service/api.service';
 import { GetRanking } from '../../service/api.interface';
 import { fromEvent, Subscription } from 'rxjs';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { faSolidCrown } from '@ng-icons/font-awesome/solid';
+
 
 @Component({
   selector: 'app-screen-finish',
-  imports: [],
+  viewProviders: [provideIcons({faSolidCrown})],
+  imports: [NgIcon],
   templateUrl: './screen-finish.component.html',
   styleUrl: './screen-finish.component.scss'
 })
@@ -129,15 +133,22 @@ export class ScreenFinishComponent implements AfterViewInit, OnDestroy {
 
       const target = document.getElementById("rank1")
       const child = target!.querySelector(".text")
+      const text = child!.querySelectorAll("span")
 
       gsap.fromTo("#rank1", { rotateX: 180 }, {
         rotateX: 0,
+        height: "40%",
         ease: 'power2.inOut',
+        background: "#e6b422",
         duration: 1,
         onStart: () => {
+
           gsap.fromTo(child, { opacity: 0 }, { opacity: 1, delay: 0.5 });
+          gsap.fromTo(text, { opacity: 0 }, { opacity: 1, color: "#333333", delay: 0.5 });
         }
+
       });
+      gsap.to("#back", { background: "#2a2a2a" })
 
     }
   }
@@ -147,15 +158,21 @@ export class ScreenFinishComponent implements AfterViewInit, OnDestroy {
 
       const target = document.getElementById("rank2")
       const child = target!.querySelector(".text")
+      const crown = child!.querySelectorAll(".crown")
 
       gsap.fromTo("#rank2", { rotateX: 180 }, {
         rotateX: 0,
+        background: "	#808080",
+        height: "30%",
         ease: 'power2.inOut',
         duration: 1,
         onStart: () => {
-          gsap.fromTo(child, { opacity: 0 }, { opacity: 1, delay: 0.5 });
+          gsap.fromTo(child, { opacity: 0 }, { opacity: 1,delay: 0.5 });
+          gsap.fromTo(crown, { opacity: 0 }, { opacity: 1, color: "#FFFFFF", delay: 0.5 });
         }
       });
+
+      gsap.to("#back", { background: "#d4d4d4" })
 
     }
   }
@@ -165,15 +182,21 @@ export class ScreenFinishComponent implements AfterViewInit, OnDestroy {
 
       const target = document.getElementById("rank3")
       const child = target!.querySelector(".text")
+      const crown = child!.querySelectorAll(".crown")
 
       gsap.fromTo("#rank3", { rotateX: 180 }, {
         rotateX: 0,
+        height: "20%",
+        background: "	#B87333",
         ease: 'power2.inOut',
         duration: 1,
         onStart: () => {
           gsap.fromTo(child, { opacity: 0 }, { opacity: 1, delay: 0.5 });
+          gsap.fromTo(crown, { opacity: 0 }, { opacity: 1, color: "#FFFFFF", delay: 0.5 });
         }
       });
+
+      gsap.to("#back", { background: "#e4e4e4" })
 
     }
   }

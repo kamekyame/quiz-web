@@ -1,11 +1,14 @@
 
 @if(toprank(); as ranking){
-<div class="ranking-board">
+<div class="ranking-board" id="back">
   @for (rank of ranking; track $index) {
   <div class="rank" id="rank{{$index+1}}">
     <div class="text">
-      <div>
-        <span>
+      <div class="left">
+        @if($index < 3){
+         <ng-icon class="crown" name="faSolidCrown"/>
+        }
+        <span class="rankNumber">
           {{rank.rank}}
         </span>
         <span>
@@ -13,7 +16,7 @@
         </span>
       </div>
       <span>
-        {{rank.score}}
+        {{rank.score}}pt
       </span>
     </div>
   </div>
@@ -22,4 +25,6 @@
 </div>
 
 }
+
+
 
