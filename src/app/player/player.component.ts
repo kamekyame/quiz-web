@@ -25,7 +25,7 @@ export class PlayerComponent {
 
   /** 現在のステータス */
   status = signal<Status>(
-    { status: 'waiting' },
+    { status: 'none' },
     {
       equal: (a, b) => {
         return JSON.stringify(a) === JSON.stringify(b);

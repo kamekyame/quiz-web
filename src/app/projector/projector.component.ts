@@ -22,7 +22,7 @@ export class ProjectorComponent {
   pollingSubscription: Subscription | undefined;
 
   status = signal<Status>(
-    { status: 'waiting' },
+    { status: 'none' },
     { equal: (a, b) => JSON.stringify(a) === JSON.stringify(b) },
   );
 
