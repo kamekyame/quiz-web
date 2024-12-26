@@ -35,6 +35,19 @@ const loginGuard: CanActivateFn = () => {
   );
 };
 
+const unloginGuard: CanActivateFn = () => {
+  const userService = inject(UserService);
+  const router = inject(Router);
+  return userService.getUser().pipe(
+    mergeMap((data) => {
+      if (data) return of(router.parseUrl('/'));
+      else {
+        return of(true);
+      }
+    }),
+  );
+};
+
 export const routes: Routes = [
   {
     path: '',
@@ -74,12 +87,18 @@ export const routes: Routes = [
     ],
   },
   {
-    path: 'signup',
-    component: SignupComponent,
-  },
-  {
-    path: 'signin',
-    component: SigninComponent,
+    path: '',
+    canActivate: [unloginGuard],
+    children: [
+      {
+        path: 'signup',
+        component: SignupComponent,
+      },
+      {
+        path: 'signin',
+        component: SigninComponent,
+      },
+    ],
   },
   { path: '**', redirectTo: '/' },
 ];
