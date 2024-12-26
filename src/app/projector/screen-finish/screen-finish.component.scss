@@ -16,22 +16,23 @@
   width: calc(100% - 100px);
   height: calc(100% - 100px);
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: start;
   flex-direction: column;
   margin: 50px;
+  padding: 0 150px;
   gap: 12px;
 }
 
 .rank{
   display: flex;
   width: 100%;
-  height: 10%;
+  height: calc(10% - 24px);
   padding: 12px;
-  background: #000000;
+  background: #534600;
   align-items: center;
   border-radius: 12px;
-  border: solid 6px #C39000;
+  border: solid 6px #534600;
 
   gap: 16px;
 

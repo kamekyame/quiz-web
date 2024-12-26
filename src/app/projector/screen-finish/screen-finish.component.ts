@@ -50,7 +50,7 @@ export class ScreenFinishComponent implements AfterViewInit {
       gsap.fromTo(target, { rotateX: 180 }, {
         rotateX: 0,
         ease: 'power2.inOut',
-        delay: 5 - 1 * index,
+        delay: 10 - 1 * index,
         duration: 1,
         onStart: () => {
           gsap.fromTo(child, { opacity: 0 }, { opacity: 1, delay: 0.5 });
