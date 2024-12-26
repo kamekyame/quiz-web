@@ -22,6 +22,8 @@ export class StatusComponent {
 
   sendStatus(status: string, questionId?: string) {
     switch (status) {
+      case 'before':
+        break;
       case 'waiting':
         break;
       case 'open':
@@ -52,6 +54,10 @@ export class StatusComponent {
         }
 
         switch (status) {
+          case 'before':
+            this.result = 'ステータスを「ゲーム開始前」に設定しました';
+            this.nowStatus.set({ status: 'before' });
+            break;
           case 'waiting':
             this.result = 'ステータスを「待機中」に設定しました';
             this.nowStatus.set({ status: 'waiting' });
