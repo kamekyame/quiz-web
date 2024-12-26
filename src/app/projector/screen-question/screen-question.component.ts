@@ -52,6 +52,7 @@ export class ScreenQuestionComponent implements OnDestroy {
 
   result: string | undefined;
   isShowAnswer = signal<boolean>(false);
+  isShowImage = signal<boolean>(false);
 
   constructor() {
     effect(() => {
@@ -59,6 +60,7 @@ export class ScreenQuestionComponent implements OnDestroy {
       if (id === undefined) return;
       this.answers.set(undefined);
       this.isShowAnswer.set(false);
+      this.isShowImage.set(false);
       this.api.getQuestionForProjector(id).subscribe((data) => {
         if (isApiError(data)) {
           this.result = `${data.error.message} (${data.error.code})`;
@@ -91,6 +93,9 @@ export class ScreenQuestionComponent implements OnDestroy {
         if (event.key === 's') {
           // show の s
           this.showAnswers();
+        } else if (event.key === 'i') {
+          // image の i
+          this.showImage();
         }
       }),
     );
@@ -123,5 +128,9 @@ export class ScreenQuestionComponent implements OnDestroy {
   showAnswers() {
     if (this.nowStatus().status !== 'close') return;
     this.isShowAnswer.set(true);
+  }
+
+  showImage() {
+    this.isShowImage.set(true);
   }
 }
