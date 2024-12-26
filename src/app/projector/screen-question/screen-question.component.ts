@@ -131,6 +131,7 @@ export class ScreenQuestionComponent implements OnDestroy {
   }
 
   showImage() {
+    if (this.nowStatus().status !== 'close') return;
     this.isShowImage.set(true);
   }
 }
