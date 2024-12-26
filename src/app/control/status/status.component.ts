@@ -2,6 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { ApiService, isApiError } from '../../service/api.service';
 import { FormsModule } from '@angular/forms';
 import { Status } from '../../service/api.interface';
+import { ProjectorService } from '../../service/projector.service';
 
 @Component({
   selector: 'app-status',
@@ -11,6 +12,7 @@ import { Status } from '../../service/api.interface';
 })
 export class StatusComponent {
   api = inject(ApiService);
+  projectorService = inject(ProjectorService);
 
   result: string | undefined;
 
@@ -74,5 +76,9 @@ export class StatusComponent {
             break;
         }
       });
+  }
+
+  showAnswers() {
+    this.projectorService.postMessage('showAnswers');
   }
 }

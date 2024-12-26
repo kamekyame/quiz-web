@@ -31,6 +31,7 @@ export class ProjectorComponent {
     this.pollingSubscription = interval(3000).subscribe(() => {
       this.updateStatus();
     });
+    this.updateStatus();
   }
 
   ngOnDestroy() {

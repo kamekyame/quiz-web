@@ -14,6 +14,13 @@ header {
     gap: 4px;
   }
 
+  button.link {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
   ng-icon {
     height: 24px;
     width: 24px;

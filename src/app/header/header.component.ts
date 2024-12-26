@@ -7,6 +7,7 @@ import {
   faSolidDisplay,
   faSolidScrewdriverWrench,
 } from '@ng-icons/font-awesome/solid';
+import { ProjectorService } from '../service/projector.service';
 
 @Component({
   selector: 'app-header',
@@ -19,6 +20,7 @@ export class HeaderComponent {
   router = inject(Router);
   apiService = inject(ApiService);
   userService = inject(UserService);
+  projectorService = inject(ProjectorService);
 
   isAdmin = computed(() => {
     return this.userService.user()?.role === 'ADMIN';
@@ -29,5 +31,10 @@ export class HeaderComponent {
       this.userService.signout();
       window.location.href = '/';
     }
+  }
+
+  openProjectorPage() {
+    const targetWindow = window.open('/projector', '_blank');
+    this.projectorService.setWindow(targetWindow);
   }
 }
