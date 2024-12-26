@@ -4,6 +4,7 @@ import {
   effect,
   inject,
   input,
+  OnDestroy,
   signal,
 } from '@angular/core';
 import { ApiService, isApiError } from '../../service/api.service';
@@ -13,6 +14,8 @@ import {
   Status,
 } from '../../service/api.interface';
 import { AuthImageDirective } from '../../directive/auth-image.directive';
+import { ProjectorService } from '../../service/projector.service';
+import { fromEvent, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-screen-question',
@@ -20,8 +23,11 @@ import { AuthImageDirective } from '../../directive/auth-image.directive';
   templateUrl: './screen-question.component.html',
   styleUrl: './screen-question.component.scss',
 })
-export class ScreenQuestionComponent {
+export class ScreenQuestionComponent implements OnDestroy {
   api = inject(ApiService);
+  projectorService = inject(ProjectorService);
+
+  subscription = new Subscription();
 
   nowStatus = input.required<Status>();
 
@@ -70,6 +76,28 @@ export class ScreenQuestionComponent {
         }
       }
     });
+
+    this.subscription.add(
+      this.projectorService.messageEvent().subscribe((message) => {
+        if (message === 'showAnswers') {
+          this.showAnswers();
+        }
+      }),
+    );
+
+    this.subscription.add(
+      fromEvent<KeyboardEvent>(window, 'keydown').subscribe((event) => {
+        console.log(event);
+        if (event.key === 's') {
+          // show の s
+          this.showAnswers();
+        }
+      }),
+    );
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   getAnswers(questionId: number) {
@@ -93,6 +121,7 @@ export class ScreenQuestionComponent {
   }
 
   showAnswers() {
+    if (this.nowStatus().status !== 'close') return;
     this.isShowAnswer.set(true);
   }
 }
