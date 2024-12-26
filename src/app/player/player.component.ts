@@ -49,7 +49,7 @@ export class PlayerComponent {
     this.apiService.getStatus().subscribe((data) => {
       if (isApiError(data)) return;
       this.status.set(data);
-      if (data.status === 'finish') {
+      if (data.status === 'finish' || data.status === 'before') {
         this.pollingSubscription?.unsubscribe();
       }
     });
