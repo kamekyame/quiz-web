@@ -2,7 +2,7 @@
 @if(toprank(); as ranking){
 <div class="ranking-board">
   @for (rank of ranking; track $index) {
-  <div class="rank">
+  <div class="rank" id="rank{{$index+1}}">
     <div class="text">
       <div>
         <span>
