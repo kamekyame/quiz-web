@@ -102,7 +102,7 @@ export class QuestionComponent {
             return;
           }
           const choice = question.choices.find((c) => c.choiceId === choiceId);
-          this.result = `${choice?.text} を選択中`;
+          this.result = `${choice?.text} で回答しました`;
         }),
       );
 
