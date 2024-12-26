@@ -6,6 +6,7 @@ import {
   ApiError,
   GetAnswersRes,
   GetMeRes,
+  GetQuestionAnswerRes,
   GetQuestionForProjectorRes,
   GetQuestionRes,
   PostQuestionAnswerReq,
@@ -63,9 +64,16 @@ export class ApiService {
     return this.get<GetQuestionRes>('/questions/' + id);
   }
 
-  /** 問題送信 */
+  /** 回答送信 */
   postAnswer(questionId: number, data: PostQuestionAnswerReq) {
     return this.post('/questions/' + questionId + '/answer', data);
+  }
+
+  /** 回答取得 */
+  getAnswer(questionId: number) {
+    return this.get<GetQuestionAnswerRes>(
+      '/questions/' + questionId + '/answer',
+    );
   }
 
   /** ステータス送信 */
