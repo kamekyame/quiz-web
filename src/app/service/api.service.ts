@@ -100,6 +100,11 @@ export class ApiService {
     return this.delete('/answers');
   }
 
+  /** すべてのユーザー登録をリセット */
+  deleteUser() {
+    return this.delete('/deleteUser');
+  }
+
   /** 各選択肢の回答数の取得（プロジェクター用） */
   getAnswers(questionId: number) {
     return this.get<GetAnswersRes>('/questions/' + questionId + '/answers');
