@@ -1,4 +1,4 @@
-<div class="container" [class.mobile-layout]="isMobileLayout()">
+<div class="container" [class.mobile-layout]="isMobileLayout()" [class.projector]="isProjector()">
   @if (!isProjector()) {
     <app-header />
   }
