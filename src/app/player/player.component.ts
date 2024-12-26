@@ -5,10 +5,16 @@ import { Status } from '../service/api.interface';
 import { QuestionComponent } from '../question/question.component';
 import { WaitingComponent } from '../waiting/waiting.component';
 import { FinishComponent } from '../finish/finish.component';
+import { BeforeComponent } from '../before/before.component';
 
 @Component({
   selector: 'app-player',
-  imports: [QuestionComponent, WaitingComponent, FinishComponent],
+  imports: [
+    QuestionComponent,
+    WaitingComponent,
+    FinishComponent,
+    BeforeComponent,
+  ],
   templateUrl: './player.component.html',
   styleUrl: './player.component.scss',
 })
