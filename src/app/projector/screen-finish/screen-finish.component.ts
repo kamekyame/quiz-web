@@ -1,5 +1,4 @@
-import { Component, computed, effect, ElementRef, inject, input, signal, ViewChild, ViewChildren } from '@angular/core';
-
+import { AfterViewInit, Component, computed, effect, ElementRef, inject, input, signal } from '@angular/core';
 import { gsap } from "gsap";
 import { ApiService, isApiError } from '../../service/api.service';
 import { GetRanking } from '../../service/api.interface';
@@ -10,11 +9,12 @@ import { GetRanking } from '../../service/api.interface';
   templateUrl: './screen-finish.component.html',
   styleUrl: './screen-finish.component.scss'
 })
-export class ScreenFinishComponent {
+export class ScreenFinishComponent implements AfterViewInit {
 
   api = inject(ApiService);
 
   ranking = signal<GetRanking | undefined>(undefined);
+  toprank = computed(()=>this.ranking()?.ranking.slice(0,10))
 
   result: string | undefined;
 
@@ -26,22 +26,27 @@ export class ScreenFinishComponent {
           return;
         }
         this.ranking.set(data);
+
+
+
       });
     });
   }
 
 
 
-
-  ngOnInit() {
-    this.animateBox();
+  ngAfterViewInit() {
     console.log(this.ranking());
+    setTimeout(() => {
+      this.animate();
+    }, 2000);
   }
 
-  animateBox() {
+  animate() {
+
+    console.log("animate")
     gsap.utils.toArray(".rank").forEach((target: any, index: number) => {
       const child = target.querySelector(".text")
-      console.log(child)
       gsap.fromTo(target, { rotateX: 180 }, {
         rotateX: 0,
         ease: 'power2.inOut',
@@ -53,7 +58,6 @@ export class ScreenFinishComponent {
 
       });
 
-      // 〜アニメーション内容〜
     });
 
   }

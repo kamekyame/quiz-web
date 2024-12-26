@@ -2,69 +2,108 @@
 <!--   <p class="screen-finish-text">以上で終了となります</p> -->
 <!--   <p class="screen-finish-text">🎉 ありがとうございました!! 🎉</p> -->
 <!-- </div> -->
+@if(toprank(); as ranking){
 <div class="ranking-board">
-  <div class="rank" #box>
-    <div class="text">
-      <div>
-        <span>
-          1
-        </span>
-        <span>
-          サウスケイ
-        </span>
-      </div>
-      <span>
-        15
-      </span>
-    </div>
-  </div>
-
+  @for (rank of ranking; track $index) {
   <div class="rank">
     <div class="text">
       <div>
         <span>
-          2
+          {{rank.rank}}
         </span>
         <span>
-          ササウスケイ
+          {{rank.username}}
         </span>
       </div>
       <span>
-        12
+        {{rank.score}}
       </span>
     </div>
-    </div>
-
-    <div class="rank">
-      <div class="text">
-        <div>
-          <span>
-            3
-          </span>
-          <span>
-            サササウスケイ
-          </span>
-        </div>
-        <span>
-          12
-        </span>
-      </div>
-    </div>
-
-    <div class="rank">
-      <div class="text">
-        <div>
-          <span>
-            4
-          </span>
-          <span>
-            ササササウスケイ
-          </span>
-        </div>
-        <span>
-          12
-        </span>
-      </div>
-    </div>
-
   </div>
+  }
+
+</div>
+
+}
+
+<!-- <div *ngFor="let rank of topRank" class="rank" #box> -->
+<!--   <div class="text"> -->
+<!--     <div> -->
+<!--       <span> -->
+<!--         {{rank.rank}} -->
+<!--       </span> -->
+<!--       <span> -->
+<!--         {{rank.username}} -->
+<!--       </span> -->
+<!--     </div> -->
+<!--     <span> -->
+<!--       {{rank.score}} -->
+<!--     </span> -->
+<!--   </div> -->
+<!-- </div> -->
+
+
+<!-- <div class="rank" #box> -->
+<!--   <div class="text"> -->
+<!--     <div> -->
+<!--       <span> -->
+<!--         1 -->
+<!--       </span> -->
+<!--       <span> -->
+<!--         サウスケイ -->
+<!--       </span> -->
+<!--     </div> -->
+<!--     <span> -->
+<!--       15 -->
+<!--     </span> -->
+<!--   </div> -->
+<!-- </div> -->
+<!---->
+<!-- <div class="rank"> -->
+<!--   <div class="text"> -->
+<!--     <div> -->
+<!--       <span> -->
+<!--         2 -->
+<!--       </span> -->
+<!--       <span> -->
+<!--         ササウスケイ -->
+<!--       </span> -->
+<!--     </div> -->
+<!--     <span> -->
+<!--       12 -->
+<!--     </span> -->
+<!--   </div> -->
+<!-- </div> -->
+<!---->
+<!-- <div class="rank"> -->
+<!--   <div class="text"> -->
+<!--     <div> -->
+<!--       <span> -->
+<!--         3 -->
+<!--       </span> -->
+<!--       <span> -->
+<!--         サササウスケイ -->
+<!--       </span> -->
+<!--     </div> -->
+<!--     <span> -->
+<!--       12 -->
+<!--     </span> -->
+<!--   </div> -->
+<!-- </div> -->
+<!---->
+<!-- <div class="rank"> -->
+<!--   <div class="text"> -->
+<!--     <div> -->
+<!--       <span> -->
+<!--         4 -->
+<!--       </span> -->
+<!--       <span> -->
+<!--         ササササウスケイ -->
+<!--       </span> -->
+<!--     </div> -->
+<!--     <span> -->
+<!--       12 -->
+<!--     </span> -->
+<!--   </div> -->
+<!-- </div> -->
+<!---->
