@@ -2,6 +2,9 @@
   <div class="status-now-status">
     <h3>現在のステータス</h3>
     @switch (nowStatus()?.status) {
+      @case ("before") {
+        <div>ゲーム開始前</div>
+      }
       @case ("waiting") {
         <div>待機中</div>
       }
