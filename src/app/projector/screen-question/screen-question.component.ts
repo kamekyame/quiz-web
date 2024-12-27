@@ -131,7 +131,8 @@ export class ScreenQuestionComponent implements OnDestroy {
   }
 
   showImage() {
-    if (this.nowStatus().status !== 'close') return;
+    // 正解の選択肢を表示していないときは画像を表示しない
+    if (this.nowStatus().status !== 'close' || !this.isShowAnswer()) return;
     this.isShowImage.set(true);
   }
 }
