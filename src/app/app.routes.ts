@@ -8,6 +8,7 @@ import { RegisterComponent } from './control/register/register.component';
 import { StatusComponent } from './control/status/status.component';
 import { PlayerComponent } from './player/player.component';
 import { ProjectorComponent } from './projector/projector.component';
+import { ScreenFinishComponent } from "./projector/screen-finish/screen-finish.component";
 import { inject } from '@angular/core';
 import { UserService } from './service/user.service';
 import { mergeMap, of } from 'rxjs';
@@ -83,7 +84,12 @@ export const routes: Routes = [
       {
         path: 'projector',
         component: ProjectorComponent,
-      },
+       },
+       {
+          path: "projector/finish",
+          component: ScreenFinishComponent,
+        }
+
     ],
   },
   {

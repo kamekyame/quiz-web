@@ -71,6 +71,14 @@ export type GetAnswersRes = {
   answers: Answer[];
 };
 
+export type GetRanking = {
+  ranking: {
+    rank: number;
+    username: string;
+    score: number;
+  }[]
+}
+
 export type Status =
   | { status: 'waiting' | 'finish' | 'before' | 'none' } // none は初期描画時のフロント独自のステータス
   | { status: 'open' | 'close'; questionId: number };
