@@ -3,7 +3,7 @@
 <div class="ranking-board" id="back">
   @for (rank of ranking; track $index) {
   <div class="rank" id="rank{{$index+1}}">
-    <div class="text">
+    <div class="text top{{$index+1}}">
       <div class="left">
         @if($index < 3){
          <ng-icon class="crown" name="faSolidCrown"/>
