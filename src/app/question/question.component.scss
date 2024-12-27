@@ -65,6 +65,14 @@
       border-color: var(--color-primary);
       color: white;
     }
+
+    // 連打防止で押せないときは、disbaled な見た目ではなく薄くするだけにする
+    &:not(.select).open:disabled {
+      color: black;
+      background-color: white;
+      border-color: var(--color-primary);
+      opacity: 0.3;
+    }
   }
 }
 
