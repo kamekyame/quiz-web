@@ -54,10 +54,29 @@
    flex-direction: row;
    justify-content: space-between;
    span{
+    letter-spacing: 3px;
     text-align: center;
     font-size: 32px;
     color: #FFFFFF;
     }
   }
+  .top1{
+    span{
+
+    font-size: 48px;
+    }
+  }
+  .top2{
+    span{
+    font-size: 42px;
+    }
+  }
+  .top3{
+    span{
+    font-size: 36px;
+    }
+  }
+
+
 }
 
