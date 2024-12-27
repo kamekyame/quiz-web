@@ -72,7 +72,7 @@ export type GetAnswersRes = {
 };
 
 export type Status =
-  | { status: 'waiting' | 'finish' | 'before' }
+  | { status: 'waiting' | 'finish' | 'before' | 'none' } // none は初期描画時のフロント独自のステータス
   | { status: 'open' | 'close'; questionId: number };
 
 export type ApiError = {

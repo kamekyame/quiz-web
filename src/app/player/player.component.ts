@@ -5,10 +5,16 @@ import { Status } from '../service/api.interface';
 import { QuestionComponent } from '../question/question.component';
 import { WaitingComponent } from '../waiting/waiting.component';
 import { FinishComponent } from '../finish/finish.component';
+import { BeforeComponent } from '../before/before.component';
 
 @Component({
   selector: 'app-player',
-  imports: [QuestionComponent, WaitingComponent, FinishComponent],
+  imports: [
+    QuestionComponent,
+    WaitingComponent,
+    FinishComponent,
+    BeforeComponent,
+  ],
   templateUrl: './player.component.html',
   styleUrl: './player.component.scss',
 })
@@ -19,7 +25,7 @@ export class PlayerComponent {
 
   /** 現在のステータス */
   status = signal<Status>(
-    { status: 'waiting' },
+    { status: 'none' },
     {
       equal: (a, b) => {
         return JSON.stringify(a) === JSON.stringify(b);
@@ -43,7 +49,7 @@ export class PlayerComponent {
     this.apiService.getStatus().subscribe((data) => {
       if (isApiError(data)) return;
       this.status.set(data);
-      if (data.status === 'finish') {
+      if (data.status === 'finish' || data.status === 'before') {
         this.pollingSubscription?.unsubscribe();
       }
     });
