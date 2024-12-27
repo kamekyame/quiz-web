@@ -2,14 +2,17 @@
   <div class="status-now-status">
     <h3>現在のステータス</h3>
     @switch (nowStatus()?.status) {
+      @case ("before") {
+        <div>ゲーム開始前</div>
+      }
       @case ("waiting") {
         <div>待機中</div>
       }
       @case ("open") {
-        <div>question_id：{{ questionId }} を出題中</div>
+        <div>question_id：{{ nowQuestionId() }} を出題中</div>
       }
       @case ("close") {
-        <div>question_id：{{ questionId }} の回答を締め切り</div>
+        <div>question_id：{{ nowQuestionId() }} の回答を締め切り</div>
       }
       @case ("finish") {
         <div>ゲーム終了</div>
@@ -33,12 +36,6 @@
   <div class="question-buttons">
     <button (click)="sendStatus('open', questionId)">問題出題</button>
     <button (click)="sendStatus('close', questionId)">回答締め切り</button>
-    <button
-      (click)="showAnswers()"
-      [disabled]="!this.projectorService.serviceEnable()"
-    >
-      回答表示
-    </button>
   </div>
 
   <div>

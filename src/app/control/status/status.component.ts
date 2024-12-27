@@ -1,8 +1,7 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { ApiService, isApiError } from '../../service/api.service';
 import { FormsModule } from '@angular/forms';
 import { Status } from '../../service/api.interface';
-import { ProjectorService } from '../../service/projector.service';
 
 @Component({
   selector: 'app-status',
@@ -12,13 +11,22 @@ import { ProjectorService } from '../../service/projector.service';
 })
 export class StatusComponent {
   api = inject(ApiService);
-  projectorService = inject(ProjectorService);
 
   result: string | undefined;
 
   questionId: string | undefined;
 
   nowStatus = signal<Status | undefined>(undefined);
+  nowQuestionId = computed(() => {
+    const s = this.nowStatus();
+    if (s === undefined) {
+      return undefined;
+    } else if (s.status === 'open' || s.status === 'close') {
+      return s.questionId;
+    } else {
+      return undefined;
+    }
+  });
 
   sendStatus(status: string, questionId?: string) {
     switch (status) {
@@ -82,9 +90,5 @@ export class StatusComponent {
             break;
         }
       });
-  }
-
-  showAnswers() {
-    this.projectorService.postMessage('showAnswers');
   }
 }
