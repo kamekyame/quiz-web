@@ -30,7 +30,7 @@ export class PlayerComponent {
   ngOnInit() {
     this.updateStatus();
     // ポーリングでステータスを取得
-    this.pollingSubscription = interval(3000).subscribe(() => {
+    this.pollingSubscription = interval(1000).subscribe(() => {
       this.updateStatus();
     });
   }
