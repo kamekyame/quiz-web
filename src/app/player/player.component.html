@@ -4,4 +4,6 @@
   <app-finish />
 } @else if (status().status === "open" || status().status === "close") {
   <app-question [nowStatus]="status()" />
+} @else if (status().status === "before") {
+  <app-before />
 }

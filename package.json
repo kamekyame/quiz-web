@@ -25,7 +25,6 @@
     "rxjs": "~7.8.0",
     "sass": "^1.83.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.15.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^19.0.5",

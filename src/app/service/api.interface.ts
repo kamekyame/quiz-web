@@ -33,6 +33,11 @@ export type PostQuestionAnswerReq = {
   choiceId: number;
 };
 
+export type GetQuestionAnswerRes = {
+  // サーバー側がtypoしてる
+  choiseId: number;
+};
+
 export type Choice = {
   choiceId: number;
   text: string;
@@ -75,7 +80,7 @@ export type GetRanking = {
 }
 
 export type Status =
-  | { status: 'waiting' | 'finish' }
+  | { status: 'waiting' | 'finish' | 'before' | 'none' } // none は初期描画時のフロント独自のステータス
   | { status: 'open' | 'close'; questionId: number };
 
 export type ApiError = {

@@ -6,6 +6,7 @@ import {
   ApiError,
   GetAnswersRes,
   GetMeRes,
+  GetQuestionAnswerRes,
   GetQuestionForProjectorRes,
   GetQuestionRes,
   GetRanking,
@@ -64,9 +65,16 @@ export class ApiService {
     return this.get<GetQuestionRes>('/questions/' + id);
   }
 
-  /** 問題送信 */
+  /** 回答送信 */
   postAnswer(questionId: number, data: PostQuestionAnswerReq) {
     return this.post('/questions/' + questionId + '/answer', data);
+  }
+
+  /** 回答取得 */
+  getAnswer(questionId: number) {
+    return this.get<GetQuestionAnswerRes>(
+      '/questions/' + questionId + '/answer',
+    );
   }
 
   /** ステータス送信 */
@@ -99,6 +107,11 @@ export class ApiService {
   /** すべての回答状況をリセット */
   deleteAnswer() {
     return this.delete('/answers');
+  }
+
+  /** すべてのユーザー登録をリセット */
+  deleteUser() {
+    return this.delete('/deleteUser');
   }
 
   /** 各選択肢の回答数の取得（プロジェクター用） */

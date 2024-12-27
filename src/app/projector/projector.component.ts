@@ -22,13 +22,13 @@ export class ProjectorComponent {
   pollingSubscription: Subscription | undefined;
 
   status = signal<Status>(
-    { status: 'waiting' },
+    { status: 'none' },
     { equal: (a, b) => JSON.stringify(a) === JSON.stringify(b) },
   );
 
   ngOnInit() {
     // ポーリングでステータスを取得
-    this.pollingSubscription = interval(3000).subscribe(() => {
+    this.pollingSubscription = interval(500).subscribe(() => {
       this.updateStatus();
     });
     this.updateStatus();
