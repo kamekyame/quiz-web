@@ -33,6 +33,11 @@ export type PostQuestionAnswerReq = {
   choiceId: number;
 };
 
+export type GetQuestionAnswerRes = {
+  // サーバー側がtypoしてる
+  choiseId: number;
+};
+
 export type Choice = {
   choiceId: number;
   text: string;

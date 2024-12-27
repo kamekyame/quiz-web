@@ -58,17 +58,29 @@ export class QuestionComponent {
     effect(() => {
       const id = this.questionId();
       if (id === undefined) return;
-      this.api.getQuestion(id).subscribe((data) => {
-        if (isApiError(data)) {
-          console.error('問題が取得できませんでした');
-          return;
-        }
-        this.question.set(data);
-        this.result = '';
-        this.selectId.set(undefined);
-        this.remainingTime.set(this.INITIAL_REMAINING_TIME);
-        this.sending.set(false);
-      });
+      forkJoin([this.api.getQuestion(id), this.api.getAnswer(id)]).subscribe(
+        ([question, answer]) => {
+          if (isApiError(question)) {
+            console.error('問題が取得できませんでした');
+            return;
+          }
+          this.question.set(question);
+          this.result = '';
+          this.remainingTime.set(this.INITIAL_REMAINING_TIME);
+          this.sending.set(false);
+
+          // 前回の回答を復元
+          if (isApiError(answer)) {
+            this.selectId.set(undefined);
+          } else {
+            this.selectId.set(answer.choiseId);
+            const choice = question.choices.find(
+              (c) => c.choiceId === answer.choiseId,
+            );
+            this.result = `${choice?.text} を選択中`;
+          }
+        },
+      );
     });
 
     effect(() => {
